@@ -1,5 +1,6 @@
 import type React from "react";
 
+import { Link } from "expo-router";
 import { GetProps, Paragraph, styled, XStack, YStack } from "tamagui";
 
 import { SourceOverview } from "@/api/aggregator/source";
@@ -40,31 +41,35 @@ export function SourceOverviewCard(props: SourceCardProps) {
 
     return (
         <SourceCardFrame horizontal={horizontal} {...rest}>
-            <SourceAvatar source={data.source} size={horizontal ? 65 : 50} />
+            <Link href={`/(authed)/(tabs)/sources/${data.source}`}>
+                <SourceAvatar source={data.source} size={horizontal ? 65 : 50} />
+            </Link>
 
-            {horizontal ? (
-                <Paragraph
-                    fontSize={nameFontSize}
-                    fontWeight="bold"
-                    numberOfLines={1}
-                    textAlign="center"
-                    maxWidth="100%"
-                >
-                    {data.source}
-                </Paragraph>
-            ) : (
-                <YStack flex={1} gap="$1">
-                    <XStack alignItems="center" gap="$1">
-                        <Paragraph fontSize={nameFontSize} fontWeight="bold" numberOfLines={1}>
-                            {data.source}
-                        </Paragraph>
-                    </XStack>
-
-                    <Paragraph color="$accent6" fontSize="$3" numberOfLines={1}>
-                        {data.url}
+            <Link href={`/(authed)/(tabs)/sources/${data.source}`} asChild>
+                {horizontal ? (
+                    <Paragraph
+                        fontSize={nameFontSize}
+                        fontWeight="bold"
+                        numberOfLines={1}
+                        textAlign="center"
+                        maxWidth="100%"
+                    >
+                        {data.source}
                     </Paragraph>
-                </YStack>
-            )}
+                ) : (
+                    <YStack flex={1} gap="$1">
+                        <XStack alignItems="center" gap="$1">
+                            <Paragraph fontSize={nameFontSize} fontWeight="bold" numberOfLines={1}>
+                                {data.source}
+                            </Paragraph>
+                        </XStack>
+
+                        <Paragraph color="$accent6" fontSize="$3" numberOfLines={1}>
+                            {data.url}
+                        </Paragraph>
+                    </YStack>
+                )}
+            </Link>
 
             <FollowToggleButton source={data.source} followed={data.followed} />
         </SourceCardFrame>

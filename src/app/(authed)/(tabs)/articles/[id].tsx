@@ -5,7 +5,7 @@ import Toast from "react-native-toast-message";
 import { Button, H5, Paragraph, ScrollView, Separator, XStack, YStack } from "tamagui";
 
 import { Article, useArticleDetails } from "@/api/aggregator/article";
-import { safeMessage } from "@/api/client";
+import { safeMessage } from "@/api/shared";
 import { useRelativeTime } from "@/hooks/useRelativeTime";
 import ArticleCategoryPill from "@/ui/components/content/article/ArticleCategoryPill";
 import ArticleCoverImage from "@/ui/components/content/article/ArticleCoverImage";

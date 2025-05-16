@@ -70,7 +70,16 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ isReady, isLoggedIn, login, logout, accessToken, refreshToken }}>
+        <AuthContext.Provider
+            value={{
+                isReady,
+                isLoggedIn,
+                login,
+                logout,
+                accessToken,
+                refreshToken,
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );

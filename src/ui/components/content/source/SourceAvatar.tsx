@@ -20,7 +20,10 @@ export default function SourceAvatar(props: SourceAvatarProps) {
 
     return (
         <StyledImage
-            source={{ uri: `https://devscast.org/images/sources/${source}.png`, cache: "force-cache" }}
+            source={{
+                uri: `https://devscast.org/images/sources/${source}.png`,
+                cache: "force-cache",
+            }}
             objectFit="contain"
             width={resolvedSize}
             height={resolvedSize}

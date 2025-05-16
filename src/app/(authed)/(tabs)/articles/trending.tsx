@@ -1,26 +1,21 @@
-import React, { useCallback } from "react";
+import React from "react";
 
 import { useRouter } from "expo-router";
 
-import { ArticleOverview, useInfiniteArticleOverviewList } from "@/api/aggregator/article";
+import { useInfiniteArticleOverviewList } from "@/api/aggregator/article";
+import { TrendingArticle } from "@/api/feed-management/trending";
+import useFlattenedItems from "@/hooks/useFlattenedItems";
 import ArticleList from "@/ui/components/content/article/ArticleList";
 import ArticleSkeletonList from "@/ui/components/content/article/ArticleSkeleton";
 import BackButton from "@/ui/components/controls/BackButton";
 import ScreenView from "@/ui/components/layout/ScreenView";
 
-export default function AllArticles() {
+export default function Trending() {
     const router = useRouter();
     const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, refetch } = useInfiniteArticleOverviewList(
         { limit: 20 }
     );
-
-    const articleOverviews: ArticleOverview[] = data?.pages.flatMap(p => p.items) ?? [];
-
-    const handleOnEndReached = useCallback(async () => {
-        if (hasNextPage && !isFetchingNextPage) {
-            await fetchNextPage();
-        }
-    }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+    const articles: TrendingArticle[] = useFlattenedItems(data);
 
     return (
         <ScreenView paddingBottom={0}>
@@ -32,8 +27,10 @@ export default function AllArticles() {
             {isLoading && <ArticleSkeletonList displayMode="magazine" />}
             {!isLoading && (
                 <ArticleList
-                    data={articleOverviews}
-                    onEndReached={handleOnEndReached}
+                    data={articles}
+                    fetchNextPage={fetchNextPage}
+                    hasNextPage={hasNextPage}
+                    isFetchingNextPage={isFetchingNextPage}
                     refreshing={isLoading}
                     onRefresh={refetch}
                     infiniteScroll={true}

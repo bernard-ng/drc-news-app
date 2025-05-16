@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Link } from "expo-router";
 import { Card, Paragraph, XStack, YStack } from "tamagui";
 
 import { ArticleOverview } from "@/api/aggregator/article";
@@ -18,18 +19,20 @@ export function ArticleMagazineCard(props: ArticleMagazineCardProps) {
 
     return (
         <Card width="100%" backgroundColor="transparent" borderRadius="$4" padding={0}>
-            <XStack flexDirection="row" gap="$3" alignItems="center">
-                <YStack flex={1} gap="$2">
-                    <Paragraph numberOfLines={2} fontWeight="600" fontSize="$5">
-                        {data.title}
-                    </Paragraph>
-                    <Paragraph size="$3" numberOfLines={2} color="$colorHover">
-                        {data.excerpt}
-                    </Paragraph>
-                </YStack>
+            <Link href={`/(authed)/(tabs)/articles/${data.id}`}>
+                <XStack flexDirection="row" gap="$3" alignItems="center">
+                    <YStack flex={1} gap="$2">
+                        <Paragraph numberOfLines={2} fontWeight="600" fontSize="$5">
+                            {data.title}
+                        </Paragraph>
+                        <Paragraph size="$3" numberOfLines={2} color="$colorHover">
+                            {data.excerpt}
+                        </Paragraph>
+                    </YStack>
 
-                {data.image && <ArticleCoverImage uri={data.image} width={120} height={90} />}
-            </XStack>
+                    {data.image && <ArticleCoverImage uri={data.image} width={120} height={90} />}
+                </XStack>
+            </Link>
 
             <YStack marginTop="$3">
                 <XStack justifyContent="space-between" alignItems="center">

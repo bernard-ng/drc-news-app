@@ -1,14 +1,17 @@
 import React, { useMemo, useState } from "react";
 
+import { Mail } from "@tamagui/lucide-icons";
 import { Link, useRouter } from "expo-router";
 import { ActivityIndicator } from "react-native";
 import Toast from "react-native-toast-message";
-import { Button, Input, Label, Paragraph, XStack, YStack } from "tamagui";
+import { Button, Paragraph, YStack } from "tamagui";
 
-import { ErrorResponse, safeMessage } from "@/api/client";
 import { LoginResponse, useLogin } from "@/api/identity-and-access/login";
+import { ErrorResponse, safeMessage } from "@/api/shared";
 import { useAuth } from "@/providers/AuthProvider";
 import BackButton from "@/ui/components/controls/BackButton";
+import EmailInput from "@/ui/components/controls/forms/EmailInput";
+import PasswordInput from "@/ui/components/controls/forms/PasswordInput";
 import ScreenView from "@/ui/components/layout/ScreenView";
 import Caption from "@/ui/components/typography/Caption";
 import Heading from "@/ui/components/typography/Heading";
@@ -24,14 +27,14 @@ export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const { mutate: loginRequest, isPending } = useLogin();
+    const { mutate, isPending } = useLogin();
 
     const isFormValid = useMemo(() => {
         return email.trim().length > 0 && password.trim().length > 0;
     }, [email, password]);
 
     const handleSubmit = () => {
-        loginRequest(
+        mutate(
             { username: email, password },
             {
                 onSuccess: async (data: LoginResponse) => {
@@ -59,32 +62,18 @@ export default function SignIn() {
                 </YStack>
 
                 <YStack gap="$2">
-                    <YStack>
-                        <Label>Email</Label>
-                        <Input
-                            value={email}
-                            onChangeText={setEmail}
-                            keyboardType="email-address"
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                            size="$large"
-                            placeholder="Adresse e-mail"
-                        />
-                    </YStack>
-                    <YStack>
-                        <XStack justifyContent="space-between" alignItems="center">
-                            <Label>Mot de passe</Label>
-                            <Link href="/password-request" asChild>
-                                <Paragraph color="$accent6"> Mot de passe oublié ?</Paragraph>
-                            </Link>
-                        </XStack>
-                        <Input
-                            value={password}
-                            onChangeText={setPassword}
-                            secureTextEntry
-                            size="$large"
-                            placeholder="Mot de passe"
-                        />
+                    <EmailInput
+                        label="Email"
+                        value={email}
+                        leadingAdornment={Mail}
+                        onChangeText={setEmail}
+                        placeholder="Adresse e-mail"
+                    />
+                    <YStack gap="$2">
+                        <PasswordInput value={password} onChangeText={setPassword} placeholder="Mot de passe" />
+                        <Link href="/password-request" asChild>
+                            <Paragraph color="$accent6"> Mot de passe oublié ?</Paragraph>
+                        </Link>
                     </YStack>
                 </YStack>
 

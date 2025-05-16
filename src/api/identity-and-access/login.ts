@@ -1,6 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
-
-import client, { ErrorResponse } from "@/api/client";
+import { usePostQuery } from "@/api/shared";
 
 export type LoginData = {
     username: string;
@@ -21,18 +19,9 @@ export type RefreshTokenResponse = {
 };
 
 export const useLogin = () => {
-    return useMutation<LoginResponse, ErrorResponse, LoginData>({
-        mutationFn: async (data: LoginData): Promise<LoginResponse> => {
-            const response = await client.post("/login_check", data);
-            return response.data;
-        },
-    });
+    return usePostQuery<LoginData, LoginResponse>("/login_check");
 };
 
 export const useLogout = () => {
-    return useMutation<void, ErrorResponse, void>({
-        mutationFn: async (): Promise<void> => {
-            await client.post("/token/invalidate");
-        },
-    });
+    return usePostQuery("/token/invalidate");
 };

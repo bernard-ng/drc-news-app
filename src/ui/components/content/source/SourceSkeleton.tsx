@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 
 import ContentLoader, { Circle, Rect } from "react-content-loader/native";
 import { FlatList } from "react-native";
+import { YStack } from "tamagui";
 
 import SourceList from "@/ui/components/content/source/SourceList";
 
@@ -28,7 +29,7 @@ const VerticalSkeleton = (props: any) => (
     </ContentLoader>
 );
 
-const horizontalSkeleton = (props: any) => (
+const HorizontalSkeleton = (props: any) => (
     <ContentLoader
         speed={1.5}
         backgroundColor="#D4D5D8"
@@ -47,7 +48,13 @@ const horizontalSkeleton = (props: any) => (
 const keyExtractor = (_: number, index: number) => index.toString();
 
 const selectSkeletonComponent = (horizontal: boolean) => {
-    return horizontal ? horizontalSkeleton : VerticalSkeleton;
+    return horizontal ? (
+        <HorizontalSkeleton />
+    ) : (
+        <YStack width="100%">
+            <VerticalSkeleton />
+        </YStack>
+    );
 };
 
 export default function SourceSkeletonList(props: SourceSkeletonListProps) {
@@ -56,9 +63,7 @@ export default function SourceSkeletonList(props: SourceSkeletonListProps) {
     const ItemSeparator = horizontal ? SourceList.HorizontalSeparator : SourceList.VerticalSeparator;
 
     const renderItem = useCallback(() => {
-        const SkeletonComponent = selectSkeletonComponent(horizontal);
-
-        return <SkeletonComponent />;
+        return selectSkeletonComponent(horizontal);
     }, [horizontal]);
 
     return (

@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 
-import { Link } from "expo-router";
 import { FlatList, FlatListProps } from "react-native";
 import { Paragraph, XStack, YStack } from "tamagui";
 
@@ -28,11 +27,7 @@ const SourceList: SourceOverviewListComponent = (props: SourceOverviewListProps)
 
     const renderItem = useCallback(
         ({ item }: { item: SourceOverview }) => {
-            return (
-                <Link href={`/(authed)/(tabs)/sources/${item.source}`}>
-                    <SourceOverviewCard data={item} horizontal={horizontal} />
-                </Link>
-            );
+            return <SourceOverviewCard data={item} horizontal={horizontal} />;
         },
         [horizontal]
     );

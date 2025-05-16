@@ -20,7 +20,7 @@ export default function FollowToggleButton(props: FollowToggleButtonProps) {
     return (
         <Button
             size="$2"
-            theme={isFollowed ? "alt1" : "accent"}
+            theme={isFollowed ? "alt1" : "surface1"}
             chromeless={isFollowed}
             onPress={handlePress}
             minWidth={80}

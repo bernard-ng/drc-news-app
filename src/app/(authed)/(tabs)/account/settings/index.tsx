@@ -1,18 +1,16 @@
-import { Search } from "@tamagui/lucide-icons";
 import { ActivityIndicator } from "react-native";
 import { Button, YStack } from "tamagui";
 
 import { useLogout } from "@/api/identity-and-access/login";
 import { useAuth } from "@/providers/AuthProvider";
-import IconButton from "@/ui/components/controls/IconButton";
 import ScreenView from "@/ui/components/layout/ScreenView";
 
-export default function Bookmarks() {
+export default function Index() {
     const authState = useAuth();
-    const { mutate: logoutRequest, isPending } = useLogout();
+    const { mutate, isPending } = useLogout();
 
     const handleLogout = async () => {
-        logoutRequest(undefined, {
+        mutate(undefined, {
             onSuccess: () => authState.logout(),
             onError: () => authState.logout(),
         });
@@ -20,10 +18,7 @@ export default function Bookmarks() {
 
     return (
         <ScreenView>
-            <ScreenView.Heading
-                title="Bookmarks"
-                trailingActions={<IconButton onPress={() => {}} icon={<Search size="$1" />} />}
-            />
+            <ScreenView.Heading title="Paramètres" />
 
             <YStack width="100%">
                 <Button

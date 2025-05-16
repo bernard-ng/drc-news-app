@@ -1,6 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
-
-import client, { ErrorResponse } from "@/api/client";
+import { usePostQuery, usePutQuery } from "@/api/shared";
 
 export type PasswordForgottenData = {
     email: string;
@@ -18,25 +16,13 @@ export type PasswordUpdateData = {
 };
 
 export const usePasswordForgotten = () => {
-    return useMutation<void, ErrorResponse, PasswordForgottenData>({
-        mutationFn: async (data: PasswordForgottenData): Promise<void> => {
-            await client.post("/password/request", data);
-        },
-    });
+    return usePostQuery<PasswordForgottenData>("/password/request");
 };
 
 export const usePasswordReset = (token: string) => {
-    return useMutation<void, ErrorResponse, PasswordResetData>({
-        mutationFn: async (data: PasswordResetData): Promise<void> => {
-            await client.post(`/password/reset/${token}`, data);
-        },
-    });
+    return usePostQuery<PasswordResetData>(`/password/reset/${token}`);
 };
 
 export const usePasswordUpdate = () => {
-    return useMutation<void, ErrorResponse, PasswordUpdateData>({
-        mutationFn: async (data: PasswordUpdateData): Promise<void> => {
-            await client.post("/password/update", data);
-        },
-    });
+    return usePutQuery<PasswordUpdateData>("/password/update");
 };
