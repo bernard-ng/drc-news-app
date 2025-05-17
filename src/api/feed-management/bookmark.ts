@@ -1,12 +1,5 @@
 import { ArticleOverview } from "@/api/aggregator/article";
-import {
-    FiltersQuery,
-    PaginatedResponse,
-    useDeleteQuery,
-    usePaginatedInfiniteQuery,
-    usePostQuery,
-    usePutQuery,
-} from "@/api/shared";
+import { FiltersQuery, useDeleteQuery, usePaginatedInfiniteQuery, usePostQuery, usePutQuery } from "@/api/shared";
 
 export type BookmarkData = {
     name: string;
@@ -25,8 +18,6 @@ export type Bookmark = {
 };
 
 export type BookmarkedArticle = ArticleOverview;
-export type BookmarkedArticlesList = PaginatedResponse<BookmarkedArticle>;
-export type BookmarkList = PaginatedResponse<Bookmark>;
 
 export const useCreateBookmark = () => {
     return usePostQuery<BookmarkData>(`/feed/bookmarks`);

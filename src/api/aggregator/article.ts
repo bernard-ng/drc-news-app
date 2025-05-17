@@ -1,10 +1,4 @@
-import {
-    FiltersQuery,
-    PaginatedResponse,
-    useGetQuery,
-    usePaginatedInfiniteQuery,
-    usePaginatedQuery,
-} from "@/api/shared";
+import { FiltersQuery, useGetQuery, usePaginatedInfiniteQuery, usePaginatedQuery } from "@/api/shared";
 
 export type ArticleOverview = {
     id: string;
@@ -16,6 +10,7 @@ export type ArticleOverview = {
     publishedAt: string;
     image?: string;
     readingTime: number;
+    bookmarked: boolean;
 };
 
 export type Article = {
@@ -44,9 +39,8 @@ export type Article = {
     publishedAt: string;
     crawledAt: string;
     updatedAt: string;
+    bookmarked: boolean;
 };
-
-export type ArticleOverviewList = PaginatedResponse<ArticleOverview>;
 
 export const useArticleDetails = (id: string) => {
     return useGetQuery<Article>(`/aggregator/articles/${id}`);
