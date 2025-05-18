@@ -3,18 +3,18 @@ import { useState } from "react";
 
 import { Button, GetProps } from "tamagui";
 
-type FollowToggleButtonProps = GetProps<typeof Button> & {
-    source: string;
+type SourceFollowButtonProps = GetProps<typeof Button> & {
+    name: string;
     followed: boolean;
 };
 
-export default function FollowToggleButton(props: FollowToggleButtonProps) {
-    const { followed, source, ...rest } = props;
+export default function SourceFollowButton(props: SourceFollowButtonProps) {
+    const { followed, name, ...rest } = props;
     const [isFollowed, setIsFollowed] = useState<boolean>(followed);
 
     const handlePress = () => {
         setIsFollowed(!isFollowed);
-        console.log(source); // request client to follow/unfollow
+        console.log(name); // request client to follow/unfollow
     };
 
     return (

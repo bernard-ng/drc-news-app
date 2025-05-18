@@ -4,8 +4,8 @@ import { Link } from "expo-router";
 import { GetProps, Paragraph, styled, XStack, YStack } from "tamagui";
 
 import { SourceOverview } from "@/api/aggregator/source";
-import FollowToggleButton from "@/ui/components/content/source/FollowToggleButton";
-import SourceAvatar from "@/ui/components/content/source/SourceAvatar";
+import SourceFollowButton from "@/ui/components/content/source/SourceFollowButton";
+import SourceProfileImage from "@/ui/components/content/source/SourceProfileImage";
 
 const SourceCardFrame = styled(YStack, {
     alignItems: "center",
@@ -41,11 +41,11 @@ export function SourceOverviewCard(props: SourceCardProps) {
 
     return (
         <SourceCardFrame horizontal={horizontal} {...rest}>
-            <Link href={`/(authed)/(tabs)/sources/${data.source}`}>
-                <SourceAvatar source={data.source} size={horizontal ? 65 : 50} />
+            <Link href={`/(authed)/(tabs)/sources/${data.name}`}>
+                <SourceProfileImage name={data.name} image={data.image} size={horizontal ? 65 : 50} />
             </Link>
 
-            <Link href={`/(authed)/(tabs)/sources/${data.source}`} asChild>
+            <Link href={`/(authed)/(tabs)/sources/${data.name}`} asChild>
                 {horizontal ? (
                     <Paragraph
                         fontSize={nameFontSize}
@@ -54,13 +54,13 @@ export function SourceOverviewCard(props: SourceCardProps) {
                         textAlign="center"
                         maxWidth="100%"
                     >
-                        {data.source}
+                        {data.displayName ?? data.name}
                     </Paragraph>
                 ) : (
                     <YStack flex={1} gap="$1">
                         <XStack alignItems="center" gap="$1">
                             <Paragraph fontSize={nameFontSize} fontWeight="bold" numberOfLines={1}>
-                                {data.source}
+                                {data.displayName ?? data.name}
                             </Paragraph>
                         </XStack>
 
@@ -71,7 +71,7 @@ export function SourceOverviewCard(props: SourceCardProps) {
                 )}
             </Link>
 
-            <FollowToggleButton source={data.source} followed={data.followed} />
+            <SourceFollowButton name={data.name} followed={data.followed} />
         </SourceCardFrame>
     );
 }

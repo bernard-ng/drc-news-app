@@ -6,7 +6,7 @@ import { Card, Paragraph, XStack, YStack } from "tamagui";
 import { ArticleOverview } from "@/api/aggregator/article";
 import { useRelativeTime } from "@/hooks/useRelativeTime";
 import ArticleCoverImage from "@/ui/components/content/article/ArticleCoverImage";
-import ArticleSourcePill from "@/ui/components/content/article/ArticleSourcePill";
+import SourceReferencePill from "@/ui/components/content/source/SourceReferencePill";
 import Caption from "@/ui/components/typography/Caption";
 
 type ArticleMagazineCardProps = {
@@ -36,7 +36,7 @@ export function ArticleMagazineCard(props: ArticleMagazineCardProps) {
 
             <YStack marginTop="$3">
                 <XStack justifyContent="space-between" alignItems="center">
-                    <ArticleSourcePill source={data.source} />
+                    <SourceReferencePill data={data.source} />
                     <Caption>{relativeTime}</Caption>
                 </XStack>
             </YStack>

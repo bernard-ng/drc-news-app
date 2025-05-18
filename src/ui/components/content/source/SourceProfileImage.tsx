@@ -8,25 +8,24 @@ const StyledImage = styled(Image, {
 });
 
 type SourceAvatarProps = GetProps<typeof StyledImage> & {
+    image: string;
+    name: string;
     size?: number;
-    width?: number;
-    height?: number;
-    source: string;
 };
 
-export default function SourceAvatar(props: SourceAvatarProps) {
-    const { source, width, height, size, ...rest } = props;
-    const resolvedSize = size ?? width ?? height ?? 50;
+export default function SourceProfileImage(props: SourceAvatarProps) {
+    const { image, name, size = 50, ...rest } = props;
 
     return (
         <StyledImage
+            accessibilityLabel={name}
             source={{
-                uri: `https://devscast.org/images/sources/${source}.png`,
+                uri: image,
                 cache: "force-cache",
             }}
             objectFit="contain"
-            width={resolvedSize}
-            height={resolvedSize}
+            width={size}
+            height={size}
             {...rest}
         />
     );

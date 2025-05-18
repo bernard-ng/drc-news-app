@@ -1,3 +1,4 @@
+import { SourceReference } from "@/api/aggregator/source";
 import { FiltersQuery, useGetQuery, usePaginatedInfiniteQuery, usePaginatedQuery } from "@/api/shared";
 
 export type ArticleOverview = {
@@ -6,7 +7,7 @@ export type ArticleOverview = {
     link: string;
     categories: string[];
     excerpt: string;
-    source: string;
+    source: SourceReference;
     publishedAt: string;
     image?: string;
     readingTime: number;
@@ -19,7 +20,7 @@ export type Article = {
     link: string;
     categories: string[];
     body: string;
-    source: string;
+    source: SourceReference;
     hash: string;
     credibility: {
         bias: "neutral" | "slightly" | "partisan" | "extreme";

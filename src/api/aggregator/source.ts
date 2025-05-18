@@ -1,21 +1,28 @@
 import { ArticleOverview } from "@/api/aggregator/article";
 import { FiltersQuery, useGetQuery, usePaginatedInfiniteQuery } from "@/api/shared";
 
-export type SourceOverview = {
-    articles: number;
-    source: string;
-    url: string;
+export type SourceReference = {
+    name: string;
+    displayName?: string;
     image: string;
+    url: string;
+};
+
+export type SourceOverview = {
+    name: string;
+    url: string;
+    articlesCount: number;
     crawledAt: string;
+    displayName?: string;
     updatedAt?: string;
+    metadataAvailable: number;
     followed: boolean;
+    image: string;
 };
 
 export type SourceDetails = {
-    source: string;
+    name: string;
     url: string;
-    followed: boolean;
-    image: string;
     credibility: {
         bias: "neutral" | "slightly" | "partisan" | "extreme";
         reliability: "trusted" | "reliable" | "average" | "unreliable" | "low_trust";
@@ -30,10 +37,14 @@ export type SourceDetails = {
         count: number;
         percentage: number;
     }[];
-    categories: number;
-    articles: number;
+    articlesCount: number;
     crawledAt: string;
+    displayName?: string;
+    description?: string;
     updatedAt?: string;
+    metadataAvailable: number;
+    followed: boolean;
+    image: string;
 };
 
 export const useSourceDetails = (source: string) => {

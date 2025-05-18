@@ -80,4 +80,30 @@ client.interceptors.response.use(
     }
 );
 
+// Log HTTP requests and responses
+client.interceptors.request.use(
+    async config => {
+        console.log("HTTP REQUEST", {
+            url: config.url,
+            data: config.data,
+            headers: config.headers,
+        });
+
+        return config;
+    },
+    error => console.log(JSON.stringify(error))
+);
+
+client.interceptors.response.use(
+    response => {
+        console.log("HTTP RESPONSE", {
+            stats: response.status,
+            data: response.data,
+        });
+
+        return response;
+    },
+    error => console.log(JSON.stringify(error))
+);
+
 export default client;

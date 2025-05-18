@@ -20,7 +20,7 @@ type SourceOverviewListComponent = React.FC<SourceOverviewListProps> & {
     VerticalSeparator: typeof VerticalSeparator;
 };
 
-const keyExtractor = (item: SourceOverview) => item.source;
+const keyExtractor = (item: SourceOverview) => item.name;
 
 const SourceList: SourceOverviewListComponent = (props: SourceOverviewListProps) => {
     const { data, horizontal = false, ...rest } = props;

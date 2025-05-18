@@ -3,30 +3,32 @@ import React from "react";
 import { Link } from "expo-router";
 import { Avatar, GetProps, Paragraph, XStack } from "tamagui";
 
-type ArticleSourcePillProps = GetProps<typeof XStack> & {
-    source: string;
+import { SourceReference } from "@/api/aggregator/source";
+
+type SourceReferencePillProps = GetProps<typeof XStack> & {
+    data: SourceReference;
 };
 
-export default function ArticleSourcePill(props: ArticleSourcePillProps) {
-    const { source, ...rest } = props;
+export default function SourceReferencePill(props: SourceReferencePillProps) {
+    const { data, ...rest } = props;
 
     return (
-        <Link href={`/(authed)/(tabs)/sources/${source}`}>
+        <Link href={`/(authed)/(tabs)/sources/${data.name}`}>
             <XStack alignItems="center" gap="$2" justifyContent="flex-start" {...rest}>
                 <Avatar circular size="$1">
                     <Avatar.Image
-                        accessibilityLabel={source}
+                        accessibilityLabel={data.name}
                         objectFit="contain"
                         backgroundColor="white"
                         source={{
-                            uri: `https://devscast.org/images/sources/${source}.png`,
+                            uri: data.image,
                             cache: "force-cache",
                         }}
                     />
                     <Avatar.Fallback backgroundColor="$gray10" />
                 </Avatar>
                 <Paragraph size="$2" fontWeight="bold">
-                    {source}
+                    {data.displayName ?? data.name}
                 </Paragraph>
             </XStack>
         </Link>

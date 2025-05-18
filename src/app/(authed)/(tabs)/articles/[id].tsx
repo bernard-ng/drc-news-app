@@ -9,7 +9,7 @@ import { safeMessage } from "@/api/shared";
 import { useRelativeTime } from "@/hooks/useRelativeTime";
 import ArticleCategoryPill from "@/ui/components/content/article/ArticleCategoryPill";
 import ArticleCoverImage from "@/ui/components/content/article/ArticleCoverImage";
-import ArticleSourcePill from "@/ui/components/content/article/ArticleSourcePill";
+import SourceReferencePill from "@/ui/components/content/source/SourceReferencePill";
 import BackButton from "@/ui/components/controls/BackButton";
 import IconButton from "@/ui/components/controls/IconButton";
 import ScreenView from "@/ui/components/layout/ScreenView";
@@ -69,7 +69,7 @@ export default function ArticleDetails() {
                     </H5>
 
                     <YStack gap="$2">
-                        <ArticleSourcePill source={article.source} />
+                        <SourceReferencePill data={article.source} />
                         <XStack height={20} alignItems="center">
                             <Caption>{relativeTime}</Caption>
                             <Separator alignSelf="stretch" vertical marginHorizontal={16} />
