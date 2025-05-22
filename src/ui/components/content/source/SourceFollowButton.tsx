@@ -1,7 +1,9 @@
-import type React from "react";
-import { useState } from "react";
+import React, { useCallback, useState } from "react";
 
+import { ActivityIndicator, Alert } from "react-native";
 import { Button, GetProps } from "tamagui";
+
+import { useFollowSource, useUnfollowSource } from "@/api/feed-management/source";
 
 type SourceFollowButtonProps = GetProps<typeof Button> & {
     name: string;
@@ -11,11 +13,36 @@ type SourceFollowButtonProps = GetProps<typeof Button> & {
 export default function SourceFollowButton(props: SourceFollowButtonProps) {
     const { followed, name, ...rest } = props;
     const [isFollowed, setIsFollowed] = useState<boolean>(followed);
+    const { mutate: follow, isPending: following } = useFollowSource(name);
+    const { mutate: unfollow, isPending: unfollowing } = useUnfollowSource(name);
+    const loading = following || unfollowing;
 
-    const handlePress = () => {
-        setIsFollowed(!isFollowed);
-        console.log(name); // request client to follow/unfollow
-    };
+    const handlePress = useCallback(() => {
+        if (isFollowed) {
+            Alert.alert(
+                "Confirmation",
+                `Êtes-vous sûr de vouloir ne plus suivre ${name} ?`,
+                [
+                    {
+                        text: "Annuler",
+                        style: "cancel",
+                    },
+                    {
+                        text: "Ne plus suivre",
+                        style: "destructive",
+                        onPress: () => {
+                            unfollow();
+                            setIsFollowed(prev => !prev);
+                        },
+                    },
+                ],
+                { cancelable: false }
+            );
+        } else {
+            follow();
+            setIsFollowed(prev => !prev);
+        }
+    }, [isFollowed, name, unfollow, follow, setIsFollowed]);
 
     return (
         <Button
@@ -27,7 +54,7 @@ export default function SourceFollowButton(props: SourceFollowButtonProps) {
             paddingHorizontal="$2"
             {...rest}
         >
-            {isFollowed ? "Suivi" : "Suivre"}
+            {loading ? <ActivityIndicator /> : isFollowed ? "Suivi" : "Suivre"}
         </Button>
     );
 }
