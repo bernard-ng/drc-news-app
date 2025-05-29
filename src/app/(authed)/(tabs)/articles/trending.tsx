@@ -2,13 +2,11 @@ import React from "react";
 
 import { useRouter } from "expo-router";
 
-import { useInfiniteArticleOverviewList } from "@/api/aggregator/article";
-import { TrendingArticle } from "@/api/feed-management/trending";
-import useFlattenedItems from "@/hooks/useFlattenedItems";
-import ArticleList from "@/ui/components/content/article/ArticleList";
-import ArticleSkeletonList from "@/ui/components/content/article/ArticleSkeleton";
-import BackButton from "@/ui/components/controls/BackButton";
-import ScreenView from "@/ui/components/layout/ScreenView";
+import { useInfiniteArticleOverviewList, TrendingArticle } from "@/api/feed-management/article";
+import { useFlattenedItems } from "@/hooks/use-flattened-items";
+import { ArticleList, ArticleSkeletonList } from "@/ui/components/content/article";
+import { BackButton } from "@/ui/components/controls/BackButton";
+import { ScreenView } from "@/ui/components/layout";
 
 export default function Trending() {
     const router = useRouter();

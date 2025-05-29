@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { IconProps } from "@tamagui/helpers-icon";
 import { ColorTokens, GetProps, Input as TamaguiInput, Label, SizeTokens, styled, XStack, YStack } from "tamagui";
 
-import Caption from "@/ui/components/typography/Caption";
+import { Caption } from "@/ui/components/typography";
 
 const StyledInput = styled(TamaguiInput, {
     size: "$large",
@@ -23,7 +23,7 @@ export type InputProps = GetProps<typeof StyledInput> & {
     id?: string;
 };
 
-export default function Input(props: InputProps) {
+export const Input = (props: InputProps) => {
     const { label, caption, error, leadingAdornment, trailingAdornment, onChangeText, id, ...rest } = props;
 
     const isInvalid = !!error;
@@ -70,4 +70,4 @@ export default function Input(props: InputProps) {
             {isInvalid && error && <Caption color="$red9">{error}</Caption>}
         </YStack>
     );
-}
+};

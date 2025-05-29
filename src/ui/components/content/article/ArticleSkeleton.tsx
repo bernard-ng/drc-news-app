@@ -4,7 +4,7 @@ import ContentLoader, { Circle, Rect } from "react-content-loader/native";
 import { Dimensions, FlatList } from "react-native";
 import { View } from "tamagui";
 
-import ArticleList, { ArticleListDisplayMode } from "@/ui/components/content/article/ArticleList";
+import { ArticleList, ArticleListDisplayMode } from "@/ui/components/content/article/ArticleList";
 
 const { width: screenWidth } = Dimensions.get("window");
 const data: number[] = new Array(5).fill(0);
@@ -97,7 +97,7 @@ const selectSkeletonComponent = (displayMode: ArticleListDisplayMode) => {
     }
 };
 
-export default function ArticleSkeletonList(props: ArticleSkeletonListProps) {
+export const ArticleSkeletonList = (props: ArticleSkeletonListProps) => {
     const { horizontal = false, displayMode = "magazine" } = props;
 
     const ItemSeparator = horizontal ? ArticleList.HorizontalSeparator : ArticleList.VerticalSeparator;
@@ -126,4 +126,4 @@ export default function ArticleSkeletonList(props: ArticleSkeletonListProps) {
             removeClippedSubviews={true}
         />
     );
-}
+};

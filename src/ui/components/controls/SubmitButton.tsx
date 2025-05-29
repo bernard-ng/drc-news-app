@@ -1,5 +1,3 @@
-import React from "react";
-
 import { ActivityIndicator } from "react-native";
 import { Button, GetProps, styled } from "tamagui";
 
@@ -15,7 +13,7 @@ type SubmitButtonProps = GetProps<typeof StyledButton> & {
     handleSubmit: () => void;
 };
 
-export default function SubmitButton(props: SubmitButtonProps) {
+export const SubmitButton = (props: SubmitButtonProps) => {
     const { isFormValid, isPending, label, handleSubmit, ...rest } = props;
 
     return (
@@ -29,4 +27,4 @@ export default function SubmitButton(props: SubmitButtonProps) {
             {isPending ? <ActivityIndicator /> : label}
         </StyledButton>
     );
-}
+};

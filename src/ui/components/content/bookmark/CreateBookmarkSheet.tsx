@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Sheet } from "@tamagui/sheet";
 import Toast from "react-native-toast-message";
@@ -6,12 +6,12 @@ import { Button, YStack } from "tamagui";
 
 import { useCreateBookmark } from "@/api/feed-management/bookmark";
 import { ErrorResponse, safeMessage } from "@/api/shared";
-import Switch from "@/ui/components/controls/forms/Switch";
-import TextArea from "@/ui/components/controls/forms/TextArea";
-import TextInput from "@/ui/components/controls/forms/TextInput";
-import SubmitButton from "@/ui/components/controls/SubmitButton";
+import { Switch } from "@/ui/components/controls/forms/Switch";
+import { TextArea } from "@/ui/components/controls/forms/TextArea";
+import { TextInput } from "@/ui/components/controls/forms/TextInput";
+import { SubmitButton } from "@/ui/components/controls/SubmitButton";
 
-export default function CreateBookmarkSheet() {
+export const CreateBookmarkSheet = () => {
     const { mutate, isPending, error } = useCreateBookmark();
     const [open, setOpen] = useState(false);
 
@@ -119,4 +119,4 @@ export default function CreateBookmarkSheet() {
             </Sheet>
         </YStack>
     );
-}
+};

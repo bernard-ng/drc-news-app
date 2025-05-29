@@ -4,22 +4,26 @@ import qs from "qs";
 
 import client from "@/api/client";
 
-export type FiltersQuery = {
+export type PaginationFilters = {
+    page?: number;
+    limit?: number;
+    lastId?: string;
+};
+
+export type ArticleFilters = PaginationFilters & {
     dateRange?: {
         start: number;
         end: number;
     };
-    page?: number;
-    limit?: number;
-    source?: string;
     search?: string;
+    sortDirection?: "asc" | "desc";
 };
 
-export type Pagination = {
-    currentPage: number;
-    totalItems: number;
-    itemsPerPage: number;
-    totalPages: number;
+export type PaginationInfo = {
+    current: number;
+    limit: number;
+    lastId?: string;
+    offset: number;
 };
 
 export type ClientDetailErrorResponse = {
@@ -38,7 +42,7 @@ export type ErrorResponse = AxiosError<ClientErrorResponse | ClientDetailErrorRe
 
 export type PaginatedResponse<TItem> = {
     items: TItem[];
-    pagination: Pagination;
+    pagination: PaginationInfo;
 };
 
 export const safeMessage = (error: AxiosError<ClientErrorResponse | ClientDetailErrorResponse> | Error): string => {
@@ -57,30 +61,30 @@ export const safeMessage = (error: AxiosError<ClientErrorResponse | ClientDetail
     return "Une erreur est survenue";
 };
 
-export const usePaginatedInfiniteQuery = <TItem>(endpoint: string, filters: FiltersQuery = {}) => {
+export const usePaginatedInfiniteQuery = <TItem>(endpoint: string, filters: PaginationFilters = {}) => {
     return useInfiniteQuery<PaginatedResponse<TItem>, ErrorResponse>({
         initialData: undefined,
-        initialPageParam: 1,
+        initialPageParam: null,
         queryKey: [endpoint, filters],
-        queryFn: async ({ pageParam = 1 }) => {
-            const query = qs.stringify({ ...filters, page: pageParam }, { skipNulls: true });
+        queryFn: async ({ pageParam = null }) => {
+            const query = qs.stringify({ ...filters, lastId: pageParam }, { skipNulls: true });
             const url = `${endpoint}?${query}`;
             const response = await client.get<PaginatedResponse<TItem>>(url);
             return response.data;
         },
         getNextPageParam: (lastPage: PaginatedResponse<TItem>) => {
-            const { currentPage, totalPages } = lastPage.pagination;
-            return currentPage < totalPages ? currentPage + 1 : undefined;
+            const { lastId } = lastPage.pagination;
+            return lastId ? lastId : null;
         },
         staleTime: 1_000 * 60 * 10,
     });
 };
 
-export const usePaginatedQuery = <TItem>(endpoint: string, filters: FiltersQuery = {}) => {
+export const usePaginatedQuery = <TItem>(endpoint: string, filters: PaginationFilters = {}) => {
     return useQuery<PaginatedResponse<TItem>, ErrorResponse>({
         queryKey: [endpoint, filters],
         queryFn: async (): Promise<PaginatedResponse<TItem>> => {
-            const query = qs.stringify({ ...filters, page: 1 }, { skipNulls: true });
+            const query = qs.stringify({ ...filters, lastId: null }, { skipNulls: true });
             const url = `${endpoint}?${query}`;
             const response = await client.get<PaginatedResponse<TItem>>(url);
             return response.data;

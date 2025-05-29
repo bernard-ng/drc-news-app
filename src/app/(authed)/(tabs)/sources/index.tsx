@@ -1,8 +1,7 @@
-import { SourceOverview, useSourceOverviewList } from "@/api/aggregator/source";
-import useFlattenedItems from "@/hooks/useFlattenedItems";
-import SourceList from "@/ui/components/content/source/SourceList";
-import SourceSkeletonList from "@/ui/components/content/source/SourceSkeleton";
-import ScreenView from "@/ui/components/layout/ScreenView";
+import { useSourceOverviewList, SourceOverview } from "@/api/feed-management/source";
+import { useFlattenedItems } from "@/hooks/use-flattened-items";
+import { SourceList, SourceSkeletonList } from "@/ui/components/content/source";
+import { ScreenView } from "@/ui/components/layout";
 
 export default function Sources() {
     const { data, isLoading } = useSourceOverviewList();

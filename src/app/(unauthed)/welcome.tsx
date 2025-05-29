@@ -1,9 +1,9 @@
 import { Link, useRouter } from "expo-router";
-import { Button, H2, Paragraph, YStack } from "tamagui";
+import { Button, YStack } from "tamagui";
 
-import AppIcon from "@/ui/components/AppIcon";
-import ScreenView from "@/ui/components/layout/ScreenView";
-import Caption from "@/ui/components/typography/Caption";
+import { AppIcon } from "@/ui/components/AppIcon";
+import { ScreenView } from "@/ui/components/layout";
+import { Caption, Text, Display } from "@/ui/components/typography";
 
 export default function Welcome() {
     const router = useRouter();
@@ -13,13 +13,11 @@ export default function Welcome() {
             <AppIcon width={100} height={100} />
             <YStack width="100%" gap="$6">
                 <YStack gap="$3">
-                    <H2 fontWeight="bold" lineHeight="$8" textAlign="center">
-                        Bienvenue sur CongoNews
-                    </H2>
-                    <Paragraph textAlign="center" lineHeight="$1" marginTop="auto">
+                    <Display textAlign="center">Bienvenue sur CongoNews</Display>
+                    <Text textAlign="center" lineHeight="$1" marginTop="auto">
                         La première plateforme d&#39;actualités intelligente qui vous aide à rester informé sur
                         congolaise et internationale.
-                    </Paragraph>
+                    </Text>
                 </YStack>
 
                 <YStack gap="$4">
@@ -27,7 +25,7 @@ export default function Welcome() {
                         Se connecter
                     </Button>
                     <Link href="/signup" asChild>
-                        <Paragraph textAlign="center">Ouvrir un compte</Paragraph>
+                        <Text textAlign="center">Ouvrir un compte</Text>
                     </Link>
                 </YStack>
 

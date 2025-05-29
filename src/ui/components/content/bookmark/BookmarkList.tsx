@@ -4,8 +4,8 @@ import { ActivityIndicator, FlatList, FlatListProps } from "react-native";
 import { YStack } from "tamagui";
 
 import { Bookmark } from "@/api/feed-management/bookmark";
-import BookmarkCard from "@/ui/components/content/bookmark/BookmarkCard";
-import BookmarkEmptyState from "@/ui/components/content/bookmark/BookmarkEmptyState";
+import { BookmarkCard } from "@/ui/components/content/bookmark/BookmarkCard";
+import { BookmarkEmptyState } from "@/ui/components/content/bookmark/BookmarkEmptyState";
 
 const VerticalSeparator = () => <YStack height="$0.75" />;
 
@@ -17,7 +17,7 @@ const LoadingIndicator = () => (
     </>
 );
 
-type BookmarkInfosListProps = Omit<FlatListProps<Bookmark>, "renderItem"> & {
+type BookmarkListProps = Omit<FlatListProps<Bookmark>, "renderItem"> & {
     data: Bookmark[];
     infiniteScroll?: boolean;
     hasNextPage?: boolean;
@@ -25,7 +25,7 @@ type BookmarkInfosListProps = Omit<FlatListProps<Bookmark>, "renderItem"> & {
     fetchNextPage?: () => void;
 };
 
-type BookmarkInfosListComponent = React.FC<BookmarkInfosListProps> & {
+type BookmarkListComponent = React.FC<BookmarkListProps> & {
     VerticalSeparator: typeof VerticalSeparator;
     LoadingIndicator: typeof LoadingIndicator;
 };
@@ -36,7 +36,7 @@ const renderItem = ({ item }: { item: Bookmark }) => {
     return <BookmarkCard data={item} />;
 };
 
-const BookmarkInfosList: BookmarkInfosListComponent = (props: BookmarkInfosListProps) => {
+const BookmarkList: BookmarkListComponent = (props: BookmarkListProps) => {
     const { data, infiniteScroll = false, hasNextPage, isFetchingNextPage, fetchNextPage, refreshing, ...rest } = props;
 
     const handleOnEndReached = useCallback(async () => {
@@ -64,7 +64,7 @@ const BookmarkInfosList: BookmarkInfosListComponent = (props: BookmarkInfosListP
     );
 };
 
-BookmarkInfosList.VerticalSeparator = VerticalSeparator;
-BookmarkInfosList.LoadingIndicator = LoadingIndicator;
+BookmarkList.VerticalSeparator = VerticalSeparator;
+BookmarkList.LoadingIndicator = LoadingIndicator;
 
-export default BookmarkInfosList;
+export { BookmarkList };

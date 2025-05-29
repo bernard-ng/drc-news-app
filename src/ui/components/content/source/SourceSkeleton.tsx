@@ -4,7 +4,7 @@ import ContentLoader, { Circle, Rect } from "react-content-loader/native";
 import { FlatList } from "react-native";
 import { YStack } from "tamagui";
 
-import SourceList from "@/ui/components/content/source/SourceList";
+import { SourceList } from "@/ui/components/content/source/SourceList";
 
 const data: number[] = new Array(5).fill(0);
 
@@ -57,7 +57,7 @@ const selectSkeletonComponent = (horizontal: boolean) => {
     );
 };
 
-export default function SourceSkeletonList(props: SourceSkeletonListProps) {
+export const SourceSkeletonList = (props: SourceSkeletonListProps) => {
     const { horizontal = false } = props;
 
     const ItemSeparator = horizontal ? SourceList.HorizontalSeparator : SourceList.VerticalSeparator;
@@ -79,4 +79,4 @@ export default function SourceSkeletonList(props: SourceSkeletonListProps) {
             removeClippedSubviews={true}
         />
     );
-}
+};

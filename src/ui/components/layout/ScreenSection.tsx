@@ -4,6 +4,8 @@ import { ArrowRight } from "@tamagui/lucide-icons";
 import { Href, Link } from "expo-router";
 import { GetProps, Paragraph, styled, XStack } from "tamagui";
 
+import { Text } from "@/ui/components/typography";
+
 const SectionContainer = styled(XStack, {
     alignItems: "center",
     justifyContent: "space-between",
@@ -31,15 +33,15 @@ const ScreenSectionLink = ({ href }: ScreenSectionLinkProps) => (
     </Link>
 );
 
-export default function ScreenSection(props: ScreenSectionProps) {
+export const ScreenSection = (props: ScreenSectionProps) => {
     const { title, forwardLink, ...rest } = props;
 
     return (
         <SectionContainer {...rest}>
-            <Paragraph fontSize="$6" fontWeight="bold" color="$color" numberOfLines={1} flexShrink={1} marginRight="$2">
+            <Text fontSize="$6" fontWeight="bold" color="$color" numberOfLines={1} flexShrink={1} marginRight="$2">
                 {title}
-            </Paragraph>
+            </Text>
             {forwardLink && <ScreenSectionLink href={forwardLink} />}
         </SectionContainer>
     );
-}
+};

@@ -4,11 +4,11 @@ import { Search } from "@tamagui/lucide-icons";
 import { YStack } from "tamagui";
 
 import { Bookmark, useBookmarkList } from "@/api/feed-management/bookmark";
-import useFlattenedItems from "@/hooks/useFlattenedItems";
-import BookmarkInfosList from "@/ui/components/content/bookmark/BookmarkInfosList";
-import IconButton from "@/ui/components/controls/IconButton";
-import ScreenView from "@/ui/components/layout/ScreenView";
-import LoadingView from "@/ui/components/LoadingView";
+import { useFlattenedItems } from "@/hooks/use-flattened-items";
+import { BookmarkList } from "@/ui/components/content/bookmark";
+import { IconButton } from "@/ui/components/controls/IconButton";
+import { ScreenView } from "@/ui/components/layout";
+import { LoadingView } from "@/ui/components/LoadingView";
 
 export default function Index() {
     const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, refetch } = useBookmarkList();
@@ -24,7 +24,7 @@ export default function Index() {
             <YStack width="100%">
                 {isLoading && <LoadingView />}
                 {!isLoading && (
-                    <BookmarkInfosList
+                    <BookmarkList
                         data={bookmarks}
                         refreshing={isLoading}
                         onRefresh={refetch}

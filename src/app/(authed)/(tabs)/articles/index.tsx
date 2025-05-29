@@ -2,15 +2,13 @@ import React from "react";
 
 import { ScrollView, YStack } from "tamagui";
 
-import { ArticleOverview, useArticleOverviewList } from "@/api/aggregator/article";
-import { SourceOverview, useSourceOverviewList } from "@/api/aggregator/source";
-import useFlattenedItems from "@/hooks/useFlattenedItems";
-import ArticleList from "@/ui/components/content/article/ArticleList";
-import ArticleSkeletonList from "@/ui/components/content/article/ArticleSkeleton";
-import SourceList from "@/ui/components/content/source/SourceList";
-import SourceSkeletonList from "@/ui/components/content/source/SourceSkeleton";
-import ScreenView from "@/ui/components/layout/ScreenView";
-import Heading from "@/ui/components/typography/Heading";
+import { ArticleOverview, useArticleOverviewList } from "@/api/feed-management/article";
+import { SourceOverview, useSourceOverviewList } from "@/api/feed-management/source";
+import { useFlattenedItems } from "@/hooks/use-flattened-items";
+import { ArticleList, ArticleSkeletonList } from "@/ui/components/content/article";
+import { SourceList, SourceSkeletonList } from "@/ui/components/content/source";
+import { ScreenView } from "@/ui/components/layout";
+import { Heading } from "@/ui/components/typography";
 
 export default function Index() {
     const { data: articles, isLoading: articlesLoading } = useArticleOverviewList({ limit: 10 });

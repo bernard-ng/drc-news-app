@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { Link, useRouter } from "expo-router";
 import { ActivityIndicator } from "react-native";
 import Toast from "react-native-toast-message";
-import { Button, Paragraph, YStack } from "tamagui";
+import { Button, YStack } from "tamagui";
 
 import { usePasswordForgotten } from "@/api/identity-and-access/password";
 import { ErrorResponse, safeMessage } from "@/api/shared";
-import BackButton from "@/ui/components/controls/BackButton";
-import EmailInput from "@/ui/components/controls/forms/EmailInput";
-import ScreenView from "@/ui/components/layout/ScreenView";
-import Heading from "@/ui/components/typography/Heading";
+import { BackButton } from "@/ui/components/controls/BackButton";
+import { EmailInput } from "@/ui/components/controls/forms";
+import { ScreenView } from "@/ui/components/layout";
+import { Heading, Text } from "@/ui/components/typography";
 
 export default function PasswordRequest() {
     const [email, setEmail] = useState("");
@@ -47,15 +47,15 @@ export default function PasswordRequest() {
             <YStack flex={1} gap="$4" width="100%" justifyContent="flex-start">
                 <YStack gap="$4">
                     <Heading>Mot de passe oublié ?</Heading>
-                    <Paragraph>
+                    <Text>
                         Veuillez entrer votre adresse e-mail pour recevoir un lien de réinitialisation de mot de passe.
-                    </Paragraph>
+                    </Text>
                 </YStack>
 
                 <EmailInput label="Email" onChangeText={setEmail} placeholder="Addresse e-mail" />
 
                 <Link href="/signin" asChild>
-                    <Paragraph>Vous avez pas de compte ? Se connecter</Paragraph>
+                    <Text>Vous avez pas de compte ? Se connecter</Text>
                 </Link>
             </YStack>
             <Button

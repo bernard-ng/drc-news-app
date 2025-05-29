@@ -1,11 +1,10 @@
-import type React from "react";
-
 import { Link } from "expo-router";
-import { GetProps, Paragraph, styled, XStack, YStack } from "tamagui";
+import { GetProps, styled, XStack, YStack } from "tamagui";
 
-import { SourceOverview } from "@/api/aggregator/source";
-import SourceFollowButton from "@/ui/components/content/source/SourceFollowButton";
-import SourceProfileImage from "@/ui/components/content/source/SourceProfileImage";
+import { SourceOverview } from "@/api/feed-management/source";
+import { SourceFollowButton } from "@/ui/components/content/source/SourceFollowButton";
+import { SourceProfileImage } from "@/ui/components/content/source/SourceProfileImage";
+import { Text } from "@/ui/components/typography";
 
 const SourceCardFrame = styled(YStack, {
     alignItems: "center",
@@ -34,7 +33,7 @@ type SourceCardProps = GetProps<typeof SourceCardFrame> & {
     horizontal?: boolean;
 };
 
-export function SourceOverviewCard(props: SourceCardProps) {
+export const SourceOverviewCard = (props: SourceCardProps) => {
     const { data, horizontal = true, ...rest } = props;
 
     const nameFontSize = horizontal ? "$3" : "$4";
@@ -47,7 +46,7 @@ export function SourceOverviewCard(props: SourceCardProps) {
 
             <Link href={`/(authed)/(tabs)/sources/${data.name}`} asChild>
                 {horizontal ? (
-                    <Paragraph
+                    <Text
                         fontSize={nameFontSize}
                         fontWeight="bold"
                         numberOfLines={1}
@@ -55,23 +54,23 @@ export function SourceOverviewCard(props: SourceCardProps) {
                         maxWidth="100%"
                     >
                         {data.displayName ?? data.name}
-                    </Paragraph>
+                    </Text>
                 ) : (
                     <YStack flex={1} gap="$1">
                         <XStack alignItems="center" gap="$1">
-                            <Paragraph fontSize={nameFontSize} fontWeight="bold" numberOfLines={1}>
+                            <Text fontSize={nameFontSize} fontWeight="bold" numberOfLines={1}>
                                 {data.displayName ?? data.name}
-                            </Paragraph>
+                            </Text>
                         </XStack>
 
-                        <Paragraph color="$accent6" fontSize="$3" numberOfLines={1}>
+                        <Text color="$accent6" fontSize="$3" numberOfLines={1}>
                             {data.url}
-                        </Paragraph>
+                        </Text>
                     </YStack>
                 )}
             </Link>
 
-            <SourceFollowButton name={data.name} followed={data.followed} />
+            <SourceFollowButton id={data.id} name={data.displayName ?? data.name} followed={data.followed} />
         </SourceCardFrame>
     );
-}
+};

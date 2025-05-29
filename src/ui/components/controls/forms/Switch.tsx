@@ -1,8 +1,6 @@
-import React from "react";
-
 import { GetProps, Label, Switch as TamaguiSwitch, XStack, YStack } from "tamagui";
 
-import Caption from "@/ui/components/typography/Caption";
+import { Caption } from "@/ui/components/typography";
 
 type SwitchProps = GetProps<typeof TamaguiSwitch> & {
     label: string;
@@ -12,7 +10,7 @@ type SwitchProps = GetProps<typeof TamaguiSwitch> & {
     id?: string;
 };
 
-export default function Switch(props: SwitchProps) {
+export const Switch = (props: SwitchProps) => {
     const { label, description, isChecked, onCheckedChange, id, ...rest } = props;
 
     return (
@@ -28,4 +26,4 @@ export default function Switch(props: SwitchProps) {
             </TamaguiSwitch>
         </XStack>
     );
-}
+};

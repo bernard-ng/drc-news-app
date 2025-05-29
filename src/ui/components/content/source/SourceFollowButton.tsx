@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { ActivityIndicator, Alert } from "react-native";
 import { Button, GetProps } from "tamagui";
@@ -6,15 +6,16 @@ import { Button, GetProps } from "tamagui";
 import { useFollowSource, useUnfollowSource } from "@/api/feed-management/source";
 
 type SourceFollowButtonProps = GetProps<typeof Button> & {
+    id: string;
     name: string;
     followed: boolean;
 };
 
-export default function SourceFollowButton(props: SourceFollowButtonProps) {
-    const { followed, name, ...rest } = props;
+export const SourceFollowButton = (props: SourceFollowButtonProps) => {
+    const { id, followed, name, ...rest } = props;
     const [isFollowed, setIsFollowed] = useState<boolean>(followed);
-    const { mutate: follow, isPending: following } = useFollowSource(name);
-    const { mutate: unfollow, isPending: unfollowing } = useUnfollowSource(name);
+    const { mutate: follow, isPending: following } = useFollowSource(id);
+    const { mutate: unfollow, isPending: unfollowing } = useUnfollowSource(id);
     const loading = following || unfollowing;
 
     const handlePress = useCallback(() => {
@@ -49,6 +50,7 @@ export default function SourceFollowButton(props: SourceFollowButtonProps) {
             size="$2"
             theme={isFollowed ? "alt1" : "surface1"}
             chromeless={isFollowed}
+            disabled={loading}
             onPress={handlePress}
             minWidth={80}
             paddingHorizontal="$2"
@@ -57,4 +59,4 @@ export default function SourceFollowButton(props: SourceFollowButtonProps) {
             {loading ? <ActivityIndicator /> : isFollowed ? "Suivi" : "Suivre"}
         </Button>
     );
-}
+};

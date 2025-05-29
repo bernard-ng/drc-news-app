@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Sheet } from "@tamagui/sheet";
 import Toast from "react-native-toast-message";
@@ -6,17 +6,17 @@ import { Button, YStack } from "tamagui";
 
 import { Bookmark, useUpdateBookmark } from "@/api/feed-management/bookmark";
 import { ErrorResponse, safeMessage } from "@/api/shared";
-import Switch from "@/ui/components/controls/forms/Switch";
-import TextArea from "@/ui/components/controls/forms/TextArea";
-import TextInput from "@/ui/components/controls/forms/TextInput";
-import SubmitButton from "@/ui/components/controls/SubmitButton";
+import { Switch } from "@/ui/components/controls/forms/Switch";
+import { TextArea } from "@/ui/components/controls/forms/TextArea";
+import { TextInput } from "@/ui/components/controls/forms/TextInput";
+import { SubmitButton } from "@/ui/components/controls/SubmitButton";
 
 type UpdateBookmarkSheetProps = {
     id: string;
     data: Bookmark;
 };
 
-export default function UpdateBookmarkSheet(props: UpdateBookmarkSheetProps) {
+export const UpdateBookmarkSheet = (props: UpdateBookmarkSheetProps) => {
     const { id, data } = props;
     const { mutate, isPending, error } = useUpdateBookmark(id);
     const [open, setOpen] = useState(false);
@@ -122,4 +122,4 @@ export default function UpdateBookmarkSheet(props: UpdateBookmarkSheetProps) {
             </Sheet>
         </YStack>
     );
-}
+};

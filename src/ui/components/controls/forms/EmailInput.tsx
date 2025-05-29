@@ -1,8 +1,8 @@
 import { Mail } from "@tamagui/lucide-icons";
 
-import Input, { InputProps } from "@/ui/components/controls/forms/Input";
+import { Input, InputProps } from "@/ui/components/controls/forms/Input";
 
-export default function EmailInput(props: InputProps) {
+export const EmailInput = (props: InputProps) => {
     const { label, caption, error, onChangeText, ...rest } = props;
 
     return (
@@ -19,4 +19,4 @@ export default function EmailInput(props: InputProps) {
             {...rest}
         />
     );
-}
+};

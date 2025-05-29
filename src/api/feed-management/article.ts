@@ -1,5 +1,5 @@
-import { SourceReference } from "@/api/aggregator/source";
-import { FiltersQuery, useGetQuery, usePaginatedInfiniteQuery, usePaginatedQuery } from "@/api/shared";
+import { SourceReference } from "@/api/feed-management/source";
+import { ArticleFilters, useGetQuery, usePaginatedInfiniteQuery, usePaginatedQuery } from "@/api/shared";
 
 export type ArticleOverview = {
     id: string;
@@ -43,14 +43,20 @@ export type Article = {
     bookmarked: boolean;
 };
 
-export const useArticleDetails = (id: string) => {
-    return useGetQuery<Article>(`/aggregator/articles/${id}`);
+export type TrendingArticle = ArticleOverview;
+
+export const useArticleTrendingList = (filters: ArticleFilters = {}) => {
+    return usePaginatedQuery<TrendingArticle>("/feed/trending", filters);
 };
 
-export const useArticleOverviewList = (filters: FiltersQuery = {}) => {
-    return usePaginatedQuery<ArticleOverview>("/aggregator/articles", filters);
+export const useArticleDetails = (articleId: string) => {
+    return useGetQuery<Article>(`/feed/articles/${articleId}`);
 };
 
-export const useInfiniteArticleOverviewList = (filters: FiltersQuery = {}) => {
-    return usePaginatedInfiniteQuery<ArticleOverview>("/aggregator/articles", filters);
+export const useArticleOverviewList = (filters: ArticleFilters = {}) => {
+    return usePaginatedQuery<ArticleOverview>("/feed/articles", filters);
+};
+
+export const useInfiniteArticleOverviewList = (filters: ArticleFilters = {}) => {
+    return usePaginatedInfiniteQuery<ArticleOverview>("/feed/articles", filters);
 };

@@ -2,8 +2,8 @@ import { ActivityIndicator } from "react-native";
 import { Button, YStack } from "tamagui";
 
 import { useLogout } from "@/api/identity-and-access/login";
-import { useAuth } from "@/providers/AuthProvider";
-import ScreenView from "@/ui/components/layout/ScreenView";
+import { useAuth } from "@/providers/auth-provider";
+import { ScreenView } from "@/ui/components/layout";
 
 export default function Index() {
     const authState = useAuth();

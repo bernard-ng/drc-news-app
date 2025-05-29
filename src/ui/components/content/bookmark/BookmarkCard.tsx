@@ -1,17 +1,17 @@
 import React from "react";
 
 import { Link } from "expo-router";
-import { Card, Paragraph, XStack, YStack } from "tamagui";
+import { Card, XStack, YStack } from "tamagui";
 
 import { Bookmark } from "@/api/feed-management/bookmark";
-import { useRelativeTime } from "@/hooks/useRelativeTime";
-import Caption from "@/ui/components/typography/Caption";
+import { useRelativeTime } from "@/hooks/use-relative-time";
+import { Caption, Text } from "@/ui/components/typography";
 
 type BookmarkCardProps = {
     data: Bookmark;
 };
 
-export default function BookmarkCard(props: BookmarkCardProps) {
+export const BookmarkCard = (props: BookmarkCardProps) => {
     const { data } = props;
     const relativeTime = useRelativeTime(data.createdAt);
 
@@ -22,13 +22,13 @@ export default function BookmarkCard(props: BookmarkCardProps) {
                     <XStack flexDirection="row" gap="$3" alignItems="center">
                         <Link href={`/(authed)/(tabs)/bookmarks/${data.id}`}>
                             <YStack flex={1} gap="$2">
-                                <Paragraph numberOfLines={2} fontWeight="600" fontSize="$5">
+                                <Text numberOfLines={2} fontWeight="600" fontSize="$5">
                                     {data.name}
-                                </Paragraph>
+                                </Text>
                                 {data.description && (
-                                    <Paragraph size="$3" numberOfLines={2} color="$colorHover">
+                                    <Text size="$3" numberOfLines={2} color="$colorHover">
                                         {data.description}
-                                    </Paragraph>
+                                    </Text>
                                 )}
                             </YStack>
                         </Link>
@@ -45,4 +45,4 @@ export default function BookmarkCard(props: BookmarkCardProps) {
             </XStack>
         </Card>
     );
-}
+};

@@ -1,8 +1,6 @@
-import React from "react";
-
 import { GetProps, Label, styled, TextArea as TamaguiTextArea, XStack, YStack } from "tamagui";
 
-import Caption from "@/ui/components/typography/Caption";
+import { Caption } from "@/ui/components/typography";
 
 const StyledTextArea = styled(TamaguiTextArea, {
     size: "$4",
@@ -21,7 +19,7 @@ type TextAreaProps = GetProps<typeof StyledTextArea> & {
     id?: string;
 };
 
-export default function TextArea(props: TextAreaProps) {
+export const TextArea = (props: TextAreaProps) => {
     const { label, caption, error, onChangeText, id, ...rest } = props;
 
     const isInvalid = !!error;
@@ -54,4 +52,4 @@ export default function TextArea(props: TextAreaProps) {
             {isInvalid && error && <Caption color="$red9">{error}</Caption>}
         </YStack>
     );
-}
+};

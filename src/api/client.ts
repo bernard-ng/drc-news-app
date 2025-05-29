@@ -20,6 +20,12 @@ const processFailedRequestsQueue = (token: string) => {
     failedRequestsQueue = [];
 };
 
+// Wait for 60 seconds before timing out
+axios.interceptors.request.use(config => {
+    config.timeout = 120_000;
+    return config;
+});
+
 // Add the Authorization header to all requests
 client.interceptors.request.use(async config => {
     const token = await getAccessToken();
@@ -84,9 +90,9 @@ client.interceptors.response.use(
 client.interceptors.request.use(
     async config => {
         console.log("HTTP REQUEST", {
+            baseURL: config.baseURL,
             url: config.url,
             data: config.data,
-            headers: config.headers,
         });
 
         return config;

@@ -1,13 +1,13 @@
 import React from "react";
 
-import Caption from "@/ui/components/typography/Caption";
+import { Caption } from "@/ui/components/typography";
 
 type ArticleCategoryPillProps = {
     category: string;
 };
 
-export default function ArticleCategoryPill(props: ArticleCategoryPillProps) {
+export const ArticleCategoryPill = (props: ArticleCategoryPillProps) => {
     const { category } = props;
 
     return <Caption>{category}</Caption>;
-}
+};

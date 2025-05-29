@@ -4,17 +4,15 @@ import { Mail } from "@tamagui/lucide-icons";
 import { Link, useRouter } from "expo-router";
 import { ActivityIndicator } from "react-native";
 import Toast from "react-native-toast-message";
-import { Button, Paragraph, YStack } from "tamagui";
+import { Button, YStack } from "tamagui";
 
 import { LoginResponse, useLogin } from "@/api/identity-and-access/login";
 import { ErrorResponse, safeMessage } from "@/api/shared";
-import { useAuth } from "@/providers/AuthProvider";
-import BackButton from "@/ui/components/controls/BackButton";
-import EmailInput from "@/ui/components/controls/forms/EmailInput";
-import PasswordInput from "@/ui/components/controls/forms/PasswordInput";
-import ScreenView from "@/ui/components/layout/ScreenView";
-import Caption from "@/ui/components/typography/Caption";
-import Heading from "@/ui/components/typography/Heading";
+import { useAuth } from "@/providers/auth-provider";
+import { BackButton } from "@/ui/components/controls/BackButton";
+import { EmailInput, PasswordInput } from "@/ui/components/controls/forms";
+import { ScreenView } from "@/ui/components/layout";
+import { Heading, Text, Caption } from "@/ui/components/typography";
 
 export default function SignIn() {
     const auth = useAuth();
@@ -58,7 +56,7 @@ export default function SignIn() {
             <YStack flex={1} gap="$4" width="100%" justifyContent="flex-start">
                 <YStack gap="$4">
                     <Heading>Connexion</Heading>
-                    <Paragraph>Bienvenue sur CongoNews, la plateforme d&#39;actualités intelligente</Paragraph>
+                    <Text>Bienvenue sur CongoNews, la plateforme d&#39;actualités intelligente</Text>
                 </YStack>
 
                 <YStack gap="$2">
@@ -72,7 +70,7 @@ export default function SignIn() {
                     <YStack gap="$2">
                         <PasswordInput value={password} onChangeText={setPassword} placeholder="Mot de passe" />
                         <Link href="/password-request" asChild>
-                            <Paragraph color="$accent6"> Mot de passe oublié ?</Paragraph>
+                            <Text color="$accent6"> Mot de passe oublié ?</Text>
                         </Link>
                     </YStack>
                 </YStack>
@@ -82,7 +80,7 @@ export default function SignIn() {
                     notre politique de confidentialité.
                 </Caption>
                 <Link href="/signup" asChild>
-                    <Paragraph>Vous n&#39;avez pas de compte ? Créer un compte</Paragraph>
+                    <Text>Vous n&#39;avez pas de compte ? Créer un compte</Text>
                 </Link>
             </YStack>
             <Button

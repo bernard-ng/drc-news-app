@@ -2,7 +2,7 @@ import type React from "react";
 
 import { H4, ParagraphProps } from "tamagui";
 
-export default function Heading(props: React.PropsWithChildren<ParagraphProps>) {
+export const Heading = (props: React.PropsWithChildren<ParagraphProps>) => {
     const { children, ...rest } = props;
 
     return (
@@ -10,4 +10,4 @@ export default function Heading(props: React.PropsWithChildren<ParagraphProps>) 
             {children}
         </H4>
     );
-}
+};

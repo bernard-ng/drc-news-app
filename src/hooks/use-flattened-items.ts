@@ -9,7 +9,7 @@ interface PaginatedResult<T> {
     items?: T[];
 }
 
-export default function useFlattenedItems<T>(data: PaginatedResult<T> | undefined | null): T[] {
+export const useFlattenedItems = <T>(data: PaginatedResult<T> | undefined | null): T[] => {
     return useMemo((): T[] => {
         if (!data) {
             return [];
@@ -23,4 +23,4 @@ export default function useFlattenedItems<T>(data: PaginatedResult<T> | undefine
             return [];
         }
     }, [data]);
-}
+};

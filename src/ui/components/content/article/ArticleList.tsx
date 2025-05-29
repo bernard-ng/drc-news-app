@@ -1,12 +1,13 @@
 import React, { useCallback } from "react";
 
 import { ActivityIndicator, Dimensions, FlatList, FlatListProps } from "react-native";
-import { Paragraph, View, XStack, YStack } from "tamagui";
+import { View, XStack, YStack } from "tamagui";
 
-import { ArticleOverview } from "@/api/aggregator/article";
+import { ArticleOverview } from "@/api/feed-management/article";
 import { ArticleMagazineCard } from "@/ui/components/content/article/ArticleMagazineCard";
 import { ArticleOverviewCard } from "@/ui/components/content/article/ArticleOverviewCard";
 import { ArticleTextOnlyCard } from "@/ui/components/content/article/ArticleTextOnlyCard";
+import { Text } from "@/ui/components/typography";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -102,7 +103,7 @@ const ArticleList: ArticleListComponent = (props: ArticleListProps) => {
             onEndReached={handleOnEndReached}
             refreshing={refreshing}
             ListFooterComponent={infiniteScroll ? LoadingIndicator : undefined}
-            ListEmptyComponent={() => <Paragraph>Pas d’articles disponibles pour le moment.</Paragraph>}
+            ListEmptyComponent={() => <Text>Pas d’articles disponibles pour le moment.</Text>}
         />
     );
 };
@@ -111,4 +112,4 @@ ArticleList.HorizontalSeparator = HorizontalSeparator;
 ArticleList.VerticalSeparator = VerticalSeparator;
 ArticleList.LoadingIndicator = LoadingIndicator;
 
-export default ArticleList;
+export { ArticleList };

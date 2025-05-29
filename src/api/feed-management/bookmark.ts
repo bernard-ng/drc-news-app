@@ -1,5 +1,5 @@
-import { ArticleOverview } from "@/api/aggregator/article";
-import { FiltersQuery, useDeleteQuery, usePaginatedInfiniteQuery, usePostQuery, usePutQuery } from "@/api/shared";
+import { ArticleOverview } from "@/api/feed-management/article";
+import { ArticleFilters, useDeleteQuery, usePaginatedInfiniteQuery, usePostQuery, usePutQuery } from "@/api/shared";
 
 export type BookmarkData = {
     name: string;
@@ -39,11 +39,11 @@ export const useRemoveArticleFromBookmark = (bookmarkId: string, articleId: stri
     return useDeleteQuery(`/feed/bookmarks/${bookmarkId}/articles/${articleId}`);
 };
 
-export const useBookmarkList = (filters: FiltersQuery = {}) => {
+export const useBookmarkList = (filters: ArticleFilters = {}) => {
     return usePaginatedInfiniteQuery<Bookmark>("/feed/bookmarks", filters);
 };
 
-export const useBookmarkedArticlesList = (bookmarkId: string, filters: FiltersQuery = {}) => {
+export const useBookmarkedArticlesList = (bookmarkId: string, filters: ArticleFilters = {}) => {
     const endpoint = `/feed/bookmarks/${bookmarkId}/articles`;
     return usePaginatedInfiniteQuery<BookmarkedArticle>(endpoint, filters);
 };

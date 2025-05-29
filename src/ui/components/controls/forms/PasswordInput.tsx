@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { Eye, EyeOff, Lock } from "@tamagui/lucide-icons";
 import { XStack } from "tamagui";
 
-import Input, { InputProps } from "@/ui/components/controls/forms/Input";
+import { Input, InputProps } from "@/ui/components/controls/forms/Input";
 
-export default function PasswordInput(props: InputProps) {
+export const PasswordInput = (props: InputProps) => {
     const { label = "Mot de passe", onChangeText, caption, error, ...rest } = props;
     const [showPassword, setShowPassword] = useState(false);
 
@@ -30,4 +30,4 @@ export default function PasswordInput(props: InputProps) {
             {...rest}
         />
     );
-}
+};

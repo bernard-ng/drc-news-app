@@ -2,7 +2,7 @@ import { ChevronRight, Settings } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
 import { Label, ListItem, ScrollView, Separator, YGroup } from "tamagui";
 
-import ScreenView from "@/ui/components/layout/ScreenView";
+import { ScreenView } from "@/ui/components/layout";
 
 export default function Index() {
     const router = useRouter();

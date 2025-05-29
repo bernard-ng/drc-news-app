@@ -13,7 +13,7 @@ type SourceAvatarProps = GetProps<typeof StyledImage> & {
     size?: number;
 };
 
-export default function SourceProfileImage(props: SourceAvatarProps) {
+export const SourceProfileImage = (props: SourceAvatarProps) => {
     const { image, name, size = 50, ...rest } = props;
 
     return (
@@ -29,4 +29,4 @@ export default function SourceProfileImage(props: SourceAvatarProps) {
             {...rest}
         />
     );
-}
+};

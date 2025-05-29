@@ -3,11 +3,11 @@ import type React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { AuthProvider } from "@/providers/AuthProvider";
-import { FontsLoaderProvider } from "@/providers/FontsLoaderProvider";
-import { NetworkProvider } from "@/providers/NetworkProvider";
-import { TamaguiConfigProvider } from "@/providers/TamaguiConfigProvider";
-import { TanstackQueryProvider } from "@/providers/TanstackQueryProvider";
+import { AuthProvider } from "@/providers/auth-provider";
+import { FontsLoaderProvider } from "@/providers/fonts-loader-provider";
+import { NetworkProvider } from "@/providers/network-provider";
+import { TamaguiConfigProvider } from "@/providers/tamagui-config-provider";
+import { TanstackQueryProvider } from "@/providers/tanstack-query-provider";
 
 export const RootProviders = ({ children }: React.PropsWithChildren) => (
     <GestureHandlerRootView style={{ flex: 1 }}>

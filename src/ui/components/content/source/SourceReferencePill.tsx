@@ -1,15 +1,16 @@
 import React from "react";
 
 import { Link } from "expo-router";
-import { Avatar, GetProps, Paragraph, XStack } from "tamagui";
+import { Avatar, GetProps, XStack } from "tamagui";
 
-import { SourceReference } from "@/api/aggregator/source";
+import { SourceReference } from "@/api/feed-management/source";
+import { Text } from "@/ui/components/typography";
 
 type SourceReferencePillProps = GetProps<typeof XStack> & {
     data: SourceReference;
 };
 
-export default function SourceReferencePill(props: SourceReferencePillProps) {
+export function SourceReferencePill(props: SourceReferencePillProps) {
     const { data, ...rest } = props;
 
     return (
@@ -27,9 +28,9 @@ export default function SourceReferencePill(props: SourceReferencePillProps) {
                     />
                     <Avatar.Fallback backgroundColor="$gray10" />
                 </Avatar>
-                <Paragraph size="$2" fontWeight="bold">
+                <Text size="$2" fontWeight="bold">
                     {data.displayName ?? data.name}
-                </Paragraph>
+                </Text>
             </XStack>
         </Link>
     );

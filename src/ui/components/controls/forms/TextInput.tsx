@@ -1,8 +1,6 @@
-import React from "react";
+import { Input, InputProps } from "@/ui/components/controls/forms/Input";
 
-import Input, { InputProps } from "@/ui/components/controls/forms/Input";
-
-export default function TextInput(props: InputProps) {
+export const TextInput = (props: InputProps) => {
     const { label, caption, error, leadingAdornment, onChangeText, ...rest } = props;
 
     return (
@@ -15,4 +13,4 @@ export default function TextInput(props: InputProps) {
             {...rest}
         />
     );
-}
+};

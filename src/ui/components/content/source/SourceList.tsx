@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 import { FlatList, FlatListProps } from "react-native";
 import { Paragraph, XStack, YStack } from "tamagui";
 
-import { SourceOverview } from "@/api/aggregator/source";
+import { SourceOverview } from "@/api/feed-management/source";
 import { SourceOverviewCard } from "@/ui/components/content/source/SourceOverviewCard";
 
 const HorizontalSeparator = () => <XStack width="$1" />;
@@ -52,4 +52,4 @@ const SourceList: SourceOverviewListComponent = (props: SourceOverviewListProps)
 SourceList.HorizontalSeparator = HorizontalSeparator;
 SourceList.VerticalSeparator = VerticalSeparator;
 
-export default SourceList;
+export { SourceList };

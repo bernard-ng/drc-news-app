@@ -4,17 +4,14 @@ import { User } from "@tamagui/lucide-icons";
 import { Link, useRouter } from "expo-router";
 import { ActivityIndicator } from "react-native";
 import Toast from "react-native-toast-message";
-import { Button, Paragraph, YStack } from "tamagui";
+import { Button, YStack } from "tamagui";
 
 import { useRegister } from "@/api/identity-and-access/register";
 import { ErrorResponse, safeMessage } from "@/api/shared";
-import BackButton from "@/ui/components/controls/BackButton";
-import EmailInput from "@/ui/components/controls/forms/EmailInput";
-import PasswordInput from "@/ui/components/controls/forms/PasswordInput";
-import TextInput from "@/ui/components/controls/forms/TextInput";
-import ScreenView from "@/ui/components/layout/ScreenView";
-import Caption from "@/ui/components/typography/Caption";
-import Heading from "@/ui/components/typography/Heading";
+import { BackButton } from "@/ui/components/controls/BackButton";
+import { EmailInput, PasswordInput, TextInput } from "@/ui/components/controls/forms";
+import { ScreenView } from "@/ui/components/layout";
+import { Heading, Text, Caption } from "@/ui/components/typography";
 
 export default function SingUp() {
     const [name, setName] = useState("");
@@ -64,7 +61,7 @@ export default function SingUp() {
             <YStack flex={1} gap="$4" width="100%" justifyContent="flex-start">
                 <YStack gap="$4">
                     <Heading>Inscription</Heading>
-                    <Paragraph>Rejoignez la communauté CongoNews et restez informé des dernières actualités</Paragraph>
+                    <Text>Rejoignez la communauté CongoNews et restez informé des dernières actualités</Text>
                 </YStack>
 
                 <YStack gap="$2">
@@ -82,7 +79,7 @@ export default function SingUp() {
                     notre politique de confidentialité.
                 </Caption>
                 <Link href="/signin">
-                    <Paragraph>Vous avez un compte ? Connectez-vous</Paragraph>
+                    <Text>Vous avez un compte ? Connectez-vous</Text>
                 </Link>
             </YStack>
             <Button
