@@ -3,22 +3,23 @@ import React, { useState } from "react";
 import { Link, useRouter } from "expo-router";
 import { ActivityIndicator } from "react-native";
 import Toast from "react-native-toast-message";
-import { Button, Input, Label, Paragraph, YStack } from "tamagui";
+import { Button, YStack } from "tamagui";
 
-import { ErrorResponse, safeMessage } from "@/api/client";
 import { usePasswordForgotten } from "@/api/identity-and-access/password";
-import BackButton from "@/ui/components/controls/BackButton";
-import ScreenView from "@/ui/components/layout/ScreenView";
-import Heading from "@/ui/components/typography/Heading";
+import { ErrorResponse, safeMessage } from "@/api/shared";
+import { BackButton } from "@/ui/components/controls/BackButton";
+import { EmailInput } from "@/ui/components/controls/forms";
+import { ScreenView } from "@/ui/components/layout";
+import { Heading, Text } from "@/ui/components/typography";
 
 export default function PasswordRequest() {
     const [email, setEmail] = useState("");
-    const { mutate: request, isPending } = usePasswordForgotten();
+    const { mutate, isPending } = usePasswordForgotten();
     const disabled = isPending || email.length === 0;
     const router = useRouter();
 
     const handleRequest = () => {
-        request(
+        mutate(
             { email },
             {
                 onSuccess: () => {
@@ -46,25 +47,15 @@ export default function PasswordRequest() {
             <YStack flex={1} gap="$4" width="100%" justifyContent="flex-start">
                 <YStack gap="$4">
                     <Heading>Mot de passe oublié ?</Heading>
-                    <Paragraph>
+                    <Text>
                         Veuillez entrer votre adresse e-mail pour recevoir un lien de réinitialisation de mot de passe.
-                    </Paragraph>
+                    </Text>
                 </YStack>
 
-                <YStack>
-                    <Label>Email</Label>
-                    <Input
-                        onChangeText={setEmail}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        keyboardType="email-address"
-                        size="$large"
-                        placeholder="Addresse e-mail"
-                    />
-                </YStack>
+                <EmailInput label="Email" onChangeText={setEmail} placeholder="Addresse e-mail" />
 
                 <Link href="/signin" asChild>
-                    <Paragraph>Vous avez pas de compte ? Se connecter</Paragraph>
+                    <Text>Vous avez pas de compte ? Se connecter</Text>
                 </Link>
             </YStack>
             <Button

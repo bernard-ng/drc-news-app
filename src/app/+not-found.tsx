@@ -1,8 +1,9 @@
 import { Link, Stack } from "expo-router";
-import { H5, Paragraph, View, YStack } from "tamagui";
+import { View, YStack } from "tamagui";
 
-import AppIcon from "@/ui/components/AppIcon";
-import ScreenView from "@/ui/components/layout/ScreenView";
+import { AppIcon } from "@/ui/components/AppIcon";
+import { ScreenView } from "@/ui/components/layout";
+import { Heading, Text } from "@/ui/components/typography";
 
 export default function NotFoundScreen() {
     return (
@@ -13,16 +14,16 @@ export default function NotFoundScreen() {
                     <AppIcon width={100} height={100} />
                     <YStack width="100%" gap="$6" alignItems="center" paddingHorizontal="$4">
                         <YStack>
-                            <H5 fontWeight="bold" lineHeight="$8" textAlign="center">
+                            <Heading fontWeight="bold" lineHeight="$8" textAlign="center">
                                 Une erreur s&#39;est produite
-                            </H5>
-                            <Paragraph textAlign="center" lineHeight="$1" marginTop="auto">
+                            </Heading>
+                            <Text textAlign="center" lineHeight="$1" marginTop="auto">
                                 Nous avons une difficulté à charger la page que vous recherchez.
-                            </Paragraph>
+                            </Text>
                         </YStack>
 
                         <Link href="/(unauthed)/welcome">
-                            <Paragraph>Recommencer</Paragraph>
+                            <Text>Recommencer</Text>
                         </Link>
                     </YStack>
                 </YStack>

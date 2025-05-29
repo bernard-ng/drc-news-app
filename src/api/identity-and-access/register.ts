@@ -1,6 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
-
-import client, { ErrorResponse } from "@/api/client";
+import { usePostQuery } from "@/api/shared";
 
 export type RegisterData = {
     name: string;
@@ -9,9 +7,5 @@ export type RegisterData = {
 };
 
 export const useRegister = () => {
-    return useMutation<void, ErrorResponse, RegisterData>({
-        mutationFn: async (data: RegisterData): Promise<void> => {
-            await client.post("/register", data);
-        },
-    });
+    return usePostQuery<RegisterData>("/register");
 };

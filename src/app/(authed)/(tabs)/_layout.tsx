@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BookMarked, Compass, Home, User } from "@tamagui/lucide-icons";
+import { BookMarked, Globe, Home, User } from "@tamagui/lucide-icons";
 import { Tabs } from "expo-router";
 import { useColorScheme } from "react-native";
 import { Paragraph } from "tamagui";
@@ -47,16 +47,16 @@ export default function TabLayout() {
                     href: "/(authed)/(tabs)/sources",
                     tabBarLabel: ({ color }) => (
                         <Paragraph size="$2" color={color}>
-                            Discover
+                            Sources
                         </Paragraph>
                     ),
-                    tabBarIcon: ({ color, size }) => <Compass size={size} color={color} />,
+                    tabBarIcon: ({ color, size }) => <Globe size={size} color={color} />,
                 }}
             />
             <Tabs.Screen
-                name="account/bookmarks"
+                name="bookmarks"
                 options={{
-                    href: "/(authed)/(tabs)/account/bookmarks",
+                    href: "/(authed)/(tabs)/bookmarks",
                     tabBarLabel: ({ color }) => (
                         <Paragraph size="$2" color={color}>
                             Signets
@@ -66,9 +66,9 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="account/settings"
+                name="account"
                 options={{
-                    href: "/(authed)/(tabs)/account/settings",
+                    href: "/(authed)/(tabs)/account",
                     tabBarLabel: ({ color }) => (
                         <Paragraph size="$2" color={color}>
                             Profil

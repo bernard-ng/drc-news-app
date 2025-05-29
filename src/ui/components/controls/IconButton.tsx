@@ -4,7 +4,7 @@ type IconButtonProps = {
     onPress: () => void;
 };
 
-export default function IconButton(props: IconButtonProps & ButtonProps) {
+export const IconButton = (props: IconButtonProps & ButtonProps) => {
     const { onPress, ...rest } = props;
 
     return (
@@ -19,4 +19,4 @@ export default function IconButton(props: IconButtonProps & ButtonProps) {
             {...rest}
         />
     );
-}
+};

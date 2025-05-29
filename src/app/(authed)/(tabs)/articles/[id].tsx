@@ -2,19 +2,18 @@ import { Bookmark, MoreVertical, Share } from "@tamagui/lucide-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
 import Toast from "react-native-toast-message";
-import { Button, H5, Paragraph, ScrollView, Separator, XStack, YStack } from "tamagui";
+import { Button, H5, ScrollView, Separator, XStack, YStack } from "tamagui";
 
-import { Article, useArticleDetails } from "@/api/aggregator/article";
-import { safeMessage } from "@/api/client";
-import { useRelativeTime } from "@/hooks/useRelativeTime";
-import ArticleCategoryPill from "@/ui/components/content/article/ArticleCategoryPill";
-import ArticleCoverImage from "@/ui/components/content/article/ArticleCoverImage";
-import ArticleSourcePill from "@/ui/components/content/article/ArticleSourcePill";
-import BackButton from "@/ui/components/controls/BackButton";
-import IconButton from "@/ui/components/controls/IconButton";
-import ScreenView from "@/ui/components/layout/ScreenView";
-import LoadingView from "@/ui/components/LoadingView";
-import Caption from "@/ui/components/typography/Caption";
+import { Article, useArticleDetails } from "@/api/feed-management/article";
+import { safeMessage } from "@/api/shared";
+import { useRelativeTime } from "@/hooks/use-relative-time";
+import { ArticleCategoryPill, ArticleCoverImage } from "@/ui/components/content/article";
+import { SourceReferencePill } from "@/ui/components/content/source";
+import { BackButton } from "@/ui/components/controls/BackButton";
+import { IconButton } from "@/ui/components/controls/IconButton";
+import { ScreenView } from "@/ui/components/layout";
+import { LoadingView } from "@/ui/components/LoadingView";
+import { Caption, Text } from "@/ui/components/typography";
 
 export default function ArticleDetails() {
     const router = useRouter();
@@ -69,7 +68,7 @@ export default function ArticleDetails() {
                     </H5>
 
                     <YStack gap="$2">
-                        <ArticleSourcePill source={article.source} />
+                        <SourceReferencePill data={article.source} />
                         <XStack height={20} alignItems="center">
                             <Caption>{relativeTime}</Caption>
                             <Separator alignSelf="stretch" vertical marginHorizontal={16} />
@@ -77,9 +76,9 @@ export default function ArticleDetails() {
                         </XStack>
                     </YStack>
 
-                    <Paragraph size="$3" marginTop="$2">
+                    <Text size="$3" marginTop="$2">
                         {article.body.trim()}
-                    </Paragraph>
+                    </Text>
                 </YStack>
                 <Button width="100%" onPress={handleReadIntegrality} theme="accent" fontWeight="bold">
                     Consulter l&#39;article

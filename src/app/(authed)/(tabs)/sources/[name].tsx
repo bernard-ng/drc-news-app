@@ -1,8 +1,7 @@
 import { useLocalSearchParams } from "expo-router";
-import { Paragraph } from "tamagui";
 
-import ScreenView from "@/ui/components/layout/ScreenView";
-import Heading from "@/ui/components/typography/Heading";
+import { ScreenView } from "@/ui/components/layout";
+import { Heading, Text } from "@/ui/components/typography";
 
 export default function SourceDetails() {
     const { name } = useLocalSearchParams();
@@ -10,7 +9,7 @@ export default function SourceDetails() {
     return (
         <ScreenView>
             <Heading>Source Details</Heading>
-            <Paragraph>{name}</Paragraph>
+            <Text>{name}</Text>
         </ScreenView>
     );
 }

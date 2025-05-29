@@ -1,21 +1,7 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
+import axios, { AxiosInstance } from "axios";
 
 import { RefreshTokenData, RefreshTokenResponse } from "@/api/identity-and-access/login";
 import { clearTokens, getAccessToken, getRefreshToken, setTokens } from "@/store/auth";
-
-export type ClientDetailErrorResponse = {
-    type: string;
-    title: string;
-    detail: string;
-    status: number;
-};
-
-export type ClientErrorResponse = {
-    code: string;
-    message: string;
-};
-
-export type ErrorResponse = AxiosError<ClientErrorResponse | ClientDetailErrorResponse>;
 
 const endpoint = process.env.EXPO_PUBLIC_API_URL!;
 const client: AxiosInstance = axios.create({
@@ -26,22 +12,6 @@ const client: AxiosInstance = axios.create({
     },
 });
 
-export const safeMessage = (error: AxiosError<ClientErrorResponse | ClientDetailErrorResponse> | Error): string => {
-    if (error instanceof AxiosError && error.response) {
-        const response = error.response.data;
-        console.log(JSON.stringify(response));
-
-        if ("message" in response) {
-            return response.message;
-        } else if ("detail" in response) {
-            return response.detail;
-        }
-    }
-
-    console.log(JSON.stringify(error));
-    return "Une erreur est survenue";
-};
-
 let isAuthTokenRefreshing = false;
 let failedRequestsQueue: ((token: string) => void)[] = [];
 
@@ -49,6 +19,12 @@ const processFailedRequestsQueue = (token: string) => {
     failedRequestsQueue.forEach(callback => callback(token));
     failedRequestsQueue = [];
 };
+
+// Wait for 60 seconds before timing out
+axios.interceptors.request.use(config => {
+    config.timeout = 120_000;
+    return config;
+});
 
 // Add the Authorization header to all requests
 client.interceptors.request.use(async config => {
@@ -108,6 +84,32 @@ client.interceptors.response.use(
 
         return Promise.reject(error);
     }
+);
+
+// Log HTTP requests and responses
+client.interceptors.request.use(
+    async config => {
+        console.log("HTTP REQUEST", {
+            baseURL: config.baseURL,
+            url: config.url,
+            data: config.data,
+        });
+
+        return config;
+    },
+    error => console.log(JSON.stringify(error))
+);
+
+client.interceptors.response.use(
+    response => {
+        console.log("HTTP RESPONSE", {
+            stats: response.status,
+            data: response.data,
+        });
+
+        return response;
+    },
+    error => console.log(JSON.stringify(error))
 );
 
 export default client;

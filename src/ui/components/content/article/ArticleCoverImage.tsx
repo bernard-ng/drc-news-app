@@ -12,8 +12,8 @@ type ArticleCoverImageProps = GetProps<typeof StyledImage> & {
     height: number;
 };
 
-export default function ArticleCoverImage(props: ArticleCoverImageProps) {
+export const ArticleCoverImage = (props: ArticleCoverImageProps) => {
     const { width, height, uri, ...rest } = props;
 
     return <StyledImage source={{ uri, cache: "force-cache" }} width={width} height={height} {...rest} />;
-}
+};

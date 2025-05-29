@@ -2,20 +2,19 @@ import React from "react";
 
 import { ScrollView, YStack } from "tamagui";
 
-import { ArticleOverview, useArticleOverviewList } from "@/api/aggregator/article";
-import { SourceOverview, useSourcesStatisticsOverview } from "@/api/aggregator/source";
-import ArticleList from "@/ui/components/content/article/ArticleList";
-import ArticleSkeletonList from "@/ui/components/content/article/ArticleSkeleton";
-import SourceList from "@/ui/components/content/source/SourceList";
-import SourceSkeletonList from "@/ui/components/content/source/SourceSkeleton";
-import ScreenView from "@/ui/components/layout/ScreenView";
-import Heading from "@/ui/components/typography/Heading";
+import { ArticleOverview, useArticleOverviewList } from "@/api/feed-management/article";
+import { SourceOverview, useSourceOverviewList } from "@/api/feed-management/source";
+import { useFlattenedItems } from "@/hooks/use-flattened-items";
+import { ArticleList, ArticleSkeletonList } from "@/ui/components/content/article";
+import { SourceList, SourceSkeletonList } from "@/ui/components/content/source";
+import { ScreenView } from "@/ui/components/layout";
+import { Heading } from "@/ui/components/typography";
 
 export default function Index() {
-    const { data: articles, isLoading: articlesLoading } = useArticleOverviewList({ limit: 20 });
-    const { data: sources, isLoading: sourcesLoading } = useSourcesStatisticsOverview();
-    const articleOverviews: ArticleOverview[] = articles?.items ?? [];
-    const sourcesOverviews: SourceOverview[] = sources?.items ?? [];
+    const { data: articles, isLoading: articlesLoading } = useArticleOverviewList({ limit: 10 });
+    const { data: sources, isLoading: sourcesLoading } = useSourceOverviewList();
+    const articleOverviews: ArticleOverview[] = useFlattenedItems(articles);
+    const sourcesOverviews: SourceOverview[] = useFlattenedItems(sources);
 
     return (
         <ScreenView paddingBottom={0}>
@@ -23,7 +22,7 @@ export default function Index() {
             <ScrollView contentContainerStyle={{ paddingBottom: 0 }}>
                 <YStack gap="$4">
                     <YStack gap="$2">
-                        <ScreenView.Section title="Tendances" forwardLink="/(authed)/(tabs)/articles/all-articles" />
+                        <ScreenView.Section title="Tendances" forwardLink="/(authed)/(tabs)/articles/trending" />
 
                         {articlesLoading && <ArticleSkeletonList displayMode="card" horizontal={true} />}
                         {!articlesLoading && (
@@ -42,12 +41,6 @@ export default function Index() {
                         {!sourcesLoading && (
                             <SourceList data={sourcesOverviews} refreshing={sourcesLoading} horizontal={true} />
                         )}
-                    </YStack>
-                    <YStack gap="$2">
-                        <ScreenView.Section
-                            title="Dernières actualités"
-                            forwardLink="/(authed)/(tabs)/articles/all-articles"
-                        />
                     </YStack>
                 </YStack>
             </ScrollView>

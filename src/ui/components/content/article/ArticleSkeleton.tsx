@@ -4,7 +4,7 @@ import ContentLoader, { Circle, Rect } from "react-content-loader/native";
 import { Dimensions, FlatList } from "react-native";
 import { View } from "tamagui";
 
-import ArticleList, { ArticleListDisplayMode } from "@/ui/components/content/article/ArticleList";
+import { ArticleList, ArticleListDisplayMode } from "@/ui/components/content/article/ArticleList";
 
 const { width: screenWidth } = Dimensions.get("window");
 const data: number[] = new Array(5).fill(0);
@@ -43,22 +43,22 @@ const MagazineCardSkeleton = (props: any) => (
         speed={1.5}
         backgroundColor="#D4D5D8"
         foregroundColor="white"
-        height={180}
+        height={140}
         animate={true}
         width="100%"
         {...props}
     >
-        <Rect x="200" y="0" rx="8" ry="8" width="40%" height="120" />
+        <Rect x="235" y="0" rx="8" ry="8" width="120" height="90" />
 
-        <Rect x="0" y="16" rx="4" ry="4" width="40%" height="10" />
-        <Rect x="0" y="32" rx="4" ry="4" width="49%" height="10" />
-        <Rect x="0" y="56" rx="4" ry="4" width="45%" height="10" />
-        <Rect x="0" y="72" rx="4" ry="4" width="30%" height="10" />
-        <Rect x="0" y="88" rx="4" ry="4" width="49%" height="10" />
+        <Rect x="0" y="0" rx="4" ry="4" width="54%" height="10" />
+        <Rect x="0" y="16" rx="4" ry="4" width="56%" height="10" />
+        <Rect x="0" y="40" rx="4" ry="4" width="55%" height="10" />
+        <Rect x="0" y="56" rx="4" ry="4" width="55%" height="10" />
+        <Rect x="0" y="72" rx="4" ry="4" width="55%" height="10" />
 
-        <Circle cx="10" cy="140" r="9" />
-        <Rect x="30" y="135" rx="4" ry="4" width="15%" height="10" />
-        <Rect x="215" y="135" rx="4" ry="4" width="140" height="10" />
+        <Circle cx="10" cy="110" r="9" />
+        <Rect x="30" y="105" rx="4" ry="4" width="15%" height="10" />
+        <Rect x="315" y="105" rx="4" ry="4" width="40" height="10" />
     </ContentLoader>
 );
 
@@ -97,7 +97,7 @@ const selectSkeletonComponent = (displayMode: ArticleListDisplayMode) => {
     }
 };
 
-export default function ArticleSkeletonList(props: ArticleSkeletonListProps) {
+export const ArticleSkeletonList = (props: ArticleSkeletonListProps) => {
     const { horizontal = false, displayMode = "magazine" } = props;
 
     const ItemSeparator = horizontal ? ArticleList.HorizontalSeparator : ArticleList.VerticalSeparator;
@@ -126,4 +126,4 @@ export default function ArticleSkeletonList(props: ArticleSkeletonListProps) {
             removeClippedSubviews={true}
         />
     );
-}
+};

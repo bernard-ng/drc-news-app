@@ -2,7 +2,7 @@ import type React from "react";
 
 import { Paragraph, ParagraphProps } from "tamagui";
 
-export default function Caption(props: React.PropsWithChildren<ParagraphProps>) {
+export const Caption = (props: React.PropsWithChildren<ParagraphProps>) => {
     const { children, ...rest } = props;
 
     return (
@@ -10,4 +10,4 @@ export default function Caption(props: React.PropsWithChildren<ParagraphProps>) 
             {children}
         </Paragraph>
     );
-}
+};

@@ -1,10 +1,9 @@
 import React, { useCallback } from "react";
 
-import { Link } from "expo-router";
 import { FlatList, FlatListProps } from "react-native";
 import { Paragraph, XStack, YStack } from "tamagui";
 
-import { SourceOverview } from "@/api/aggregator/source";
+import { SourceOverview } from "@/api/feed-management/source";
 import { SourceOverviewCard } from "@/ui/components/content/source/SourceOverviewCard";
 
 const HorizontalSeparator = () => <XStack width="$1" />;
@@ -21,18 +20,14 @@ type SourceOverviewListComponent = React.FC<SourceOverviewListProps> & {
     VerticalSeparator: typeof VerticalSeparator;
 };
 
-const keyExtractor = (item: SourceOverview) => item.source;
+const keyExtractor = (item: SourceOverview) => item.name;
 
 const SourceList: SourceOverviewListComponent = (props: SourceOverviewListProps) => {
     const { data, horizontal = false, ...rest } = props;
 
     const renderItem = useCallback(
         ({ item }: { item: SourceOverview }) => {
-            return (
-                <Link href={`/(authed)/(tabs)/sources/${item.source}`}>
-                    <SourceOverviewCard data={item} horizontal={horizontal} />
-                </Link>
-            );
+            return <SourceOverviewCard data={item} horizontal={horizontal} />;
         },
         [horizontal]
     );
@@ -57,4 +52,4 @@ const SourceList: SourceOverviewListComponent = (props: SourceOverviewListProps)
 SourceList.HorizontalSeparator = HorizontalSeparator;
 SourceList.VerticalSeparator = VerticalSeparator;
 
-export default SourceList;
+export { SourceList };

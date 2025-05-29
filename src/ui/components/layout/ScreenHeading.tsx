@@ -1,6 +1,8 @@
 import React from "react";
 
-import { Paragraph, styled, View, XStack } from "tamagui";
+import { styled, View, XStack } from "tamagui";
+
+import { Text } from "@/ui/components/typography";
 
 const ActionContainer = styled(XStack, {
     alignItems: "center",
@@ -16,7 +18,7 @@ interface ScreenHeadingProps {
     marginBottom?: number | string;
 }
 
-export default function ScreenHeading(props: ScreenHeadingProps) {
+export const ScreenHeading = (props: ScreenHeadingProps) => {
     const { leadingAction, title, trailingActions, paddingHorizontal = "$4", marginBottom = "$2" } = props;
     const trailingActionsArray = Array.isArray(trailingActions)
         ? trailingActions
@@ -36,9 +38,9 @@ export default function ScreenHeading(props: ScreenHeadingProps) {
             <ActionContainer>{leadingAction}</ActionContainer>
             <XStack flex={1} justifyContent="center">
                 {title ? (
-                    <Paragraph fontWeight="600" fontSize="$6">
+                    <Text fontWeight="600" fontSize="$6">
                         {title}
-                    </Paragraph>
+                    </Text>
                 ) : (
                     <View />
                 )}
@@ -50,4 +52,4 @@ export default function ScreenHeading(props: ScreenHeadingProps) {
             </ActionContainer>
         </XStack>
     );
-}
+};

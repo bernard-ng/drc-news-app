@@ -5,7 +5,7 @@ type BackButtonProps = {
     onPress: () => void;
 };
 
-export default function BackButton(props: BackButtonProps & ButtonProps) {
+export const BackButton = (props: BackButtonProps & ButtonProps) => {
     const { onPress, ...rest } = props;
 
     return (
@@ -22,4 +22,4 @@ export default function BackButton(props: BackButtonProps & ButtonProps) {
             {...rest}
         />
     );
-}
+};

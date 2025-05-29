@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 import { Theme } from "tamagui";
 
-import { RootProviders } from "@/providers/RootProviders";
+import { RootProviders } from "@/providers/root-providers";
 
 export { ErrorBoundary } from "expo-router";
 

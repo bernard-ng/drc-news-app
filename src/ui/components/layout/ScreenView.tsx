@@ -4,8 +4,8 @@ import { StatusBar } from "expo-status-bar";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { styled, YStack } from "tamagui";
 
-import ScreenHeading from "@/ui/components/layout/ScreenHeading";
-import ScreenSection from "@/ui/components/layout/ScreenSection";
+import { ScreenHeading } from "@/ui/components/layout/ScreenHeading";
+import { ScreenSection } from "@/ui/components/layout/ScreenSection";
 
 type ScreenViewProps = React.ComponentProps<typeof YStack> & {
     showStatusBar?: boolean;
@@ -75,4 +75,4 @@ const ScreenView: ScreenViewComponent = (props: React.PropsWithChildren<ScreenVi
 ScreenView.Heading = ScreenHeading;
 ScreenView.Section = ScreenSection;
 
-export default ScreenView;
+export { ScreenView };
