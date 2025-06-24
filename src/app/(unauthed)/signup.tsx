@@ -6,12 +6,12 @@ import { ActivityIndicator } from "react-native";
 import Toast from "react-native-toast-message";
 import { Button, YStack } from "tamagui";
 
-import { useRegister } from "@/api/identity-and-access/register";
+import { useRegister } from "@/api/request/identity-and-access/register";
 import { ErrorResponse, safeMessage } from "@/api/shared";
 import { BackButton } from "@/ui/components/controls/BackButton";
 import { EmailInput, PasswordInput, TextInput } from "@/ui/components/controls/forms";
 import { ScreenView } from "@/ui/components/layout";
-import { Heading, Text, Caption } from "@/ui/components/typography";
+import { Caption, Heading, Text } from "@/ui/components/typography";
 
 export default function SingUp() {
     const [name, setName] = useState("");

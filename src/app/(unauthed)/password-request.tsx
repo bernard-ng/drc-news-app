@@ -5,7 +5,7 @@ import { ActivityIndicator } from "react-native";
 import Toast from "react-native-toast-message";
 import { Button, YStack } from "tamagui";
 
-import { usePasswordForgotten } from "@/api/identity-and-access/password";
+import { usePasswordForgotten } from "@/api/request/identity-and-access/password";
 import { ErrorResponse, safeMessage } from "@/api/shared";
 import { BackButton } from "@/ui/components/controls/BackButton";
 import { EmailInput } from "@/ui/components/controls/forms";

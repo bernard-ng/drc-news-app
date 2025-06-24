@@ -1,5 +1,4 @@
-import { SourceReference } from "@/api/feed-management/source";
-import { ArticleFilters, useGetQuery, usePaginatedInfiniteQuery, usePaginatedQuery } from "@/api/shared";
+import { SourceReference } from "@/api/schema/feed-management/source";
 
 export type ArticleOverview = {
     id: string;
@@ -44,19 +43,3 @@ export type Article = {
 };
 
 export type TrendingArticle = ArticleOverview;
-
-export const useArticleTrendingList = (filters: ArticleFilters = {}) => {
-    return usePaginatedQuery<TrendingArticle>("/feed/trending", filters);
-};
-
-export const useArticleDetails = (articleId: string) => {
-    return useGetQuery<Article>(`/feed/articles/${articleId}`);
-};
-
-export const useArticleOverviewList = (filters: ArticleFilters = {}) => {
-    return usePaginatedQuery<ArticleOverview>("/feed/articles", filters);
-};
-
-export const useInfiniteArticleOverviewList = (filters: ArticleFilters = {}) => {
-    return usePaginatedInfiniteQuery<ArticleOverview>("/feed/articles", filters);
-};

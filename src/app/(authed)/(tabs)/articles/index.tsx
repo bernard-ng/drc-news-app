@@ -2,8 +2,10 @@ import React from "react";
 
 import { ScrollView, YStack } from "tamagui";
 
-import { ArticleOverview, useArticleOverviewList } from "@/api/feed-management/article";
-import { SourceOverview, useSourceOverviewList } from "@/api/feed-management/source";
+import { useArticleOverviewList } from "@/api/request/feed-management/article";
+import { useSourceOverviewList } from "@/api/request/feed-management/source";
+import { ArticleOverview } from "@/api/schema/feed-management/article";
+import { SourceOverview } from "@/api/schema/feed-management/source";
 import { useFlattenedItems } from "@/hooks/use-flattened-items";
 import { ArticleList, ArticleSkeletonList } from "@/ui/components/content/article";
 import { SourceList, SourceSkeletonList } from "@/ui/components/content/source";

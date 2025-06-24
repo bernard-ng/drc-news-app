@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "expo-router";
 import { Card, XStack, YStack } from "tamagui";
 
-import { Bookmark } from "@/api/feed-management/bookmark";
+import { Bookmark } from "@/api/schema/feed-management/bookmark";
 import { useRelativeTime } from "@/hooks/use-relative-time";
 import { Caption, Text } from "@/ui/components/typography";
 

@@ -4,7 +4,8 @@ import * as WebBrowser from "expo-web-browser";
 import Toast from "react-native-toast-message";
 import { Button, H5, ScrollView, Separator, XStack, YStack } from "tamagui";
 
-import { Article, useArticleDetails } from "@/api/feed-management/article";
+import { useArticleDetails } from "@/api/request/feed-management/article";
+import { Article } from "@/api/schema/feed-management/article";
 import { safeMessage } from "@/api/shared";
 import { useRelativeTime } from "@/hooks/use-relative-time";
 import { ArticleCategoryPill, ArticleCoverImage } from "@/ui/components/content/article";

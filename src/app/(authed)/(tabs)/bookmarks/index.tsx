@@ -3,7 +3,8 @@ import React from "react";
 import { Search } from "@tamagui/lucide-icons";
 import { YStack } from "tamagui";
 
-import { Bookmark, useBookmarkList } from "@/api/feed-management/bookmark";
+import { useBookmarkList } from "@/api/request/feed-management/bookmark";
+import { Bookmark } from "@/api/schema/feed-management/bookmark";
 import { useFlattenedItems } from "@/hooks/use-flattened-items";
 import { BookmarkList } from "@/ui/components/content/bookmark";
 import { IconButton } from "@/ui/components/controls/IconButton";

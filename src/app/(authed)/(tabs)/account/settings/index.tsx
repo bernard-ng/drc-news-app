@@ -1,7 +1,7 @@
 import { ActivityIndicator } from "react-native";
 import { Button, YStack } from "tamagui";
 
-import { useLogout } from "@/api/identity-and-access/login";
+import { useLogout } from "@/api/request/identity-and-access/login";
 import { useAuth } from "@/providers/auth-provider";
 import { ScreenView } from "@/ui/components/layout";
 

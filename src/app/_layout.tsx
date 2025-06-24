@@ -1,5 +1,6 @@
 import React from "react";
 
+import * as Sentry from "@sentry/react-native";
 import { Stack } from "expo-router";
 import { useColorScheme } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -10,7 +11,16 @@ import { RootProviders } from "@/providers/root-providers";
 
 export { ErrorBoundary } from "expo-router";
 
-export default function RootLayout() {
+Sentry.init({
+    dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
+    sendDefaultPii: true,
+    debug: __DEV__,
+    tracesSampleRate: 1.0,
+    tracePropagationTargets: [/.*?/],
+    spotlight: __DEV__,
+});
+
+function RootLayout() {
     const colorScheme = useColorScheme();
     const insets = useSafeAreaInsets();
 
@@ -25,3 +35,5 @@ export default function RootLayout() {
         </React.StrictMode>
     );
 }
+
+export default Sentry.wrap(RootLayout);

@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 import { ActivityIndicator, FlatList, FlatListProps } from "react-native";
 import { YStack } from "tamagui";
 
-import { Bookmark } from "@/api/feed-management/bookmark";
+import { Bookmark } from "@/api/schema/feed-management/bookmark";
 import { BookmarkCard } from "@/ui/components/content/bookmark/BookmarkCard";
 import { BookmarkEmptyState } from "@/ui/components/content/bookmark/BookmarkEmptyState";
 

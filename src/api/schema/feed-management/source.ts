@@ -1,6 +1,3 @@
-import { ArticleOverview } from "@/api/feed-management/article";
-import { ArticleFilters, useDeleteQuery, useGetQuery, usePaginatedInfiniteQuery, usePostQuery } from "@/api/shared";
-
 export type SourceReference = {
     id: string;
     name: string;
@@ -54,24 +51,4 @@ export type SourceDetails = {
     metadataAvailable: number;
     followed: boolean;
     image: string;
-};
-
-export const useSourceDetails = (sourceId: string) => {
-    return useGetQuery<SourceDetails>(`/feed/sources/${sourceId}`);
-};
-
-export const useSourceOverviewList = (filters: ArticleFilters = {}) => {
-    return usePaginatedInfiniteQuery<SourceOverview>("/feed/sources", filters);
-};
-
-export const useSourceArticleOverviewList = (sourceId: string, filters: ArticleFilters = {}) => {
-    return usePaginatedInfiniteQuery<ArticleOverview>(`/feed/sources/${sourceId}/articles`, filters);
-};
-
-export const useFollowSource = (sourceId: string) => {
-    return usePostQuery(`/feed/sources/${sourceId}/follow`);
-};
-
-export const useUnfollowSource = (sourceId: string) => {
-    return useDeleteQuery(`/feed/sources/${sourceId}/unfollow`);
 };

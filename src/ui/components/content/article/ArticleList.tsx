@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 import { ActivityIndicator, Dimensions, FlatList, FlatListProps } from "react-native";
 import { View, XStack, YStack } from "tamagui";
 
-import { ArticleOverview } from "@/api/feed-management/article";
+import { ArticleOverview } from "@/api/schema/feed-management/article";
 import { ArticleMagazineCard } from "@/ui/components/content/article/ArticleMagazineCard";
 import { ArticleOverviewCard } from "@/ui/components/content/article/ArticleOverviewCard";
 import { ArticleTextOnlyCard } from "@/ui/components/content/article/ArticleTextOnlyCard";

@@ -6,13 +6,14 @@ import { ActivityIndicator } from "react-native";
 import Toast from "react-native-toast-message";
 import { Button, YStack } from "tamagui";
 
-import { LoginResponse, useLogin } from "@/api/identity-and-access/login";
+import { useLogin } from "@/api/request/identity-and-access/login";
+import { LoginResponse } from "@/api/schema/identity-and-access/login";
 import { ErrorResponse, safeMessage } from "@/api/shared";
 import { useAuth } from "@/providers/auth-provider";
 import { BackButton } from "@/ui/components/controls/BackButton";
 import { EmailInput, PasswordInput } from "@/ui/components/controls/forms";
 import { ScreenView } from "@/ui/components/layout";
-import { Heading, Text, Caption } from "@/ui/components/typography";
+import { Caption, Heading, Text } from "@/ui/components/typography";
 
 export default function SignIn() {
     const auth = useAuth();

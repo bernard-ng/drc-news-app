@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+import { skipToken, useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import qs from "qs";
 
@@ -48,7 +48,6 @@ export type PaginatedResponse<TItem> = {
 export const safeMessage = (error: AxiosError<ClientErrorResponse | ClientDetailErrorResponse> | Error): string => {
     if (error instanceof AxiosError && error.response) {
         const response = error.response.data;
-        console.log(JSON.stringify(response));
 
         if ("message" in response) {
             return response.message;
@@ -57,7 +56,7 @@ export const safeMessage = (error: AxiosError<ClientErrorResponse | ClientDetail
         }
     }
 
-    console.log(JSON.stringify(error));
+    console.error(JSON.stringify(error));
     return "Une erreur est survenue";
 };
 
@@ -93,40 +92,60 @@ export const usePaginatedQuery = <TItem>(endpoint: string, filters: PaginationFi
     });
 };
 
-export const useGetQuery = <TItem>(endpoint: string) => {
+export const useGetQuery = <TItem>(endpoint: string, enabled: boolean = true) => {
     return useQuery<TItem, ErrorResponse>({
         queryKey: [endpoint],
-        queryFn: async (): Promise<TItem> => {
-            const response = await client.get<TItem>(endpoint);
-            return response.data;
-        },
+        queryFn: enabled
+            ? async (): Promise<TItem> => {
+                  const response = await client.get<TItem>(endpoint);
+                  return response.data;
+              }
+            : skipToken,
         staleTime: 1_000 * 60 * 10,
     });
 };
 
-export const usePostQuery = <TPayload = void, TResponse = void>(endpoint: string) => {
+export const usePostQuery = <TPayload = void, TResponse = void>(endpoint: string, keys: string[] = []) => {
+    const queryClient = useQueryClient();
     return useMutation<TResponse, ErrorResponse, TPayload>({
         mutationFn: async (data: TPayload): Promise<TResponse> => {
             const response = await client.post<TResponse>(endpoint, data);
             return response.data;
         },
+        onSuccess: async () => {
+            for (const key of keys) {
+                await queryClient.invalidateQueries({ queryKey: [key] });
+            }
+        },
     });
 };
 
-export const usePutQuery = <TPayload = void, TResponse = void>(endpoint: string) => {
+export const usePutQuery = <TPayload = void, TResponse = void>(endpoint: string, keys: string[] = []) => {
+    const queryClient = useQueryClient();
     return useMutation<TResponse, ErrorResponse, TPayload>({
         mutationFn: async (data: TPayload): Promise<TResponse> => {
             const response = await client.put<TResponse>(endpoint, data);
             return response.data;
         },
+        onSuccess: async () => {
+            for (const key of keys) {
+                await queryClient.invalidateQueries({ queryKey: [key] });
+            }
+        },
     });
 };
 
-export const useDeleteQuery = <TResponse = void>(endpoint: string) => {
+export const useDeleteQuery = <TResponse = void>(endpoint: string, keys: string[] = []) => {
+    const queryClient = useQueryClient();
     return useMutation<TResponse, ErrorResponse>({
         mutationFn: async (): Promise<TResponse> => {
             const response = await client.delete<TResponse>(endpoint);
             return response.data;
+        },
+        onSuccess: async () => {
+            for (const key of keys) {
+                await queryClient.invalidateQueries({ queryKey: [key] });
+            }
         },
     });
 };

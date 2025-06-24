@@ -2,7 +2,8 @@ import React from "react";
 
 import { useRouter } from "expo-router";
 
-import { useInfiniteArticleOverviewList, TrendingArticle } from "@/api/feed-management/article";
+import { useInfiniteArticleOverviewList } from "@/api/request/feed-management/article";
+import { TrendingArticle } from "@/api/schema/feed-management/article";
 import { useFlattenedItems } from "@/hooks/use-flattened-items";
 import { ArticleList, ArticleSkeletonList } from "@/ui/components/content/article";
 import { BackButton } from "@/ui/components/controls/BackButton";

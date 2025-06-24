@@ -1,4 +1,4 @@
-package com.bernardng.congonews
+package dev.ngandu.congonews
 
 import android.app.Application
 import android.content.res.Configuration

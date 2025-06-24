@@ -4,7 +4,7 @@ import { Sheet } from "@tamagui/sheet";
 import Toast from "react-native-toast-message";
 import { Button, YStack } from "tamagui";
 
-import { useCreateBookmark } from "@/api/feed-management/bookmark";
+import { useCreateBookmark } from "@/api/request/feed-management/bookmark";
 import { ErrorResponse, safeMessage } from "@/api/shared";
 import { Switch } from "@/ui/components/controls/forms/Switch";
 import { TextArea } from "@/ui/components/controls/forms/TextArea";

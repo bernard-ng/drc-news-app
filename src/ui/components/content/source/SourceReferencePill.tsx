@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "expo-router";
 import { Avatar, GetProps, XStack } from "tamagui";
 
-import { SourceReference } from "@/api/feed-management/source";
+import { SourceReference } from "@/api/schema/feed-management/source";
 import { Text } from "@/ui/components/typography";
 
 type SourceReferencePillProps = GetProps<typeof XStack> & {

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "CongoNews",
-    "slug": "congo-news",
+    "name": "congonews",
+    "slug": "congonews",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/logo.png",
@@ -11,15 +11,15 @@
     "githubUrl": "https://github.com/bernard-ng/drc-news-app",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.bernard-ng.congo-news"
+      "bundleIdentifier": "dev.ngandu.congonews"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/logo.png",
         "backgroundColor": "#ffffff",
-        "package": "com.bernard-ng.congo-news"
+        "package": "dev.ngandu.congonews"
       },
-      "package": "com.bernard-ng.congo-news"
+      "package": "dev.ngandu.congonews"
     },
     "web": {
       "bundler": "metro",
@@ -38,7 +38,15 @@
         }
       ],
       "expo-build-properties",
-      "expo-localization"
+      "expo-localization",
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://glitchtip.devscast.tech/",
+          "project": "drc-news-app",
+          "organization": "devscast-software"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

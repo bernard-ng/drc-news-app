@@ -1,4 +1,4 @@
-package com.bernardng.congonews
+package dev.ngandu.congonews
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

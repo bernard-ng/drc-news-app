@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { ActivityIndicator, Alert } from "react-native";
 import { Button, GetProps } from "tamagui";
 
-import { useFollowSource, useUnfollowSource } from "@/api/feed-management/source";
+import { useFollowSource, useUnfollowSource } from "@/api/request/feed-management/source";
 
 type SourceFollowButtonProps = GetProps<typeof Button> & {
     id: string;
