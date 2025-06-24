@@ -39,8 +39,8 @@ export const Input = (props: InputProps) => {
     }, [leadingAdornment]);
 
     return (
-        <YStack gap="$2">
-            <YStack gap={0}>
+        <YStack gap="$1">
+            <YStack>
                 {label && (
                     <Label htmlFor={id} fontWeight="bold" color={isInvalid ? "$red9" : undefined}>
                         {label}

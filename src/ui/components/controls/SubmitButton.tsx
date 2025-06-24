@@ -8,19 +8,17 @@ const StyledButton = styled(Button, {
 
 type SubmitButtonProps = GetProps<typeof StyledButton> & {
     label: string;
-    isFormValid: boolean;
+    isValid: boolean;
     isPending: boolean;
-    handleSubmit: () => void;
 };
 
 export const SubmitButton = (props: SubmitButtonProps) => {
-    const { isFormValid, isPending, label, handleSubmit, ...rest } = props;
+    const { isValid, isPending, label, ...rest } = props;
 
     return (
         <StyledButton
-            onPress={handleSubmit}
-            disabled={!isFormValid || isPending}
-            theme={!isFormValid || isPending ? "disabled" : "accent"}
+            disabled={isPending}
+            theme={!isValid || isPending ? "disabled" : "accent"}
             fontWeight="bold"
             {...rest}
         >

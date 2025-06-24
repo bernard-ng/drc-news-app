@@ -1,9 +1,10 @@
 import { Mail } from "@tamagui/lucide-icons";
 
 import { Input, InputProps } from "@/ui/components/controls/forms/Input";
+import { withController } from "@/ui/components/controls/forms/withController";
 
 export const EmailInput = (props: InputProps) => {
-    const { label, caption, error, onChangeText, ...rest } = props;
+    const { label = "Email", caption, error, onChangeText, ...rest } = props;
 
     return (
         <Input
@@ -20,3 +21,5 @@ export const EmailInput = (props: InputProps) => {
         />
     );
 };
+
+export const FormEmailInput = withController<InputProps>(EmailInput);

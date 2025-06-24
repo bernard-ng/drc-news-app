@@ -1,5 +1,6 @@
 import { GetProps, Label, styled, TextArea as TamaguiTextArea, XStack, YStack } from "tamagui";
 
+import { withController } from "@/ui/components/controls/forms/withController";
 import { Caption } from "@/ui/components/typography";
 
 const StyledTextArea = styled(TamaguiTextArea, {
@@ -53,3 +54,5 @@ export const TextArea = (props: TextAreaProps) => {
         </YStack>
     );
 };
+
+export const FormTextArea = withController<TextAreaProps>(TextArea);

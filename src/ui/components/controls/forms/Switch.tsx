@@ -1,5 +1,6 @@
 import { GetProps, Label, Switch as TamaguiSwitch, XStack, YStack } from "tamagui";
 
+import { withController } from "@/ui/components/controls/forms/withController";
 import { Caption } from "@/ui/components/typography";
 
 type SwitchProps = GetProps<typeof TamaguiSwitch> & {
@@ -27,3 +28,5 @@ export const Switch = (props: SwitchProps) => {
         </XStack>
     );
 };
+
+export const FormSwitch = withController<SwitchProps>(Switch);

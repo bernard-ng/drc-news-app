@@ -1,19 +1,19 @@
 import { endpoint } from "@/api/endpoint";
 import {
-    PasswordForgottenPayload,
-    PasswordResetPayload,
-    PasswordUpdatePayload,
+    RequestPasswordPayload,
+    ResetPasswordPayload,
+    UpdatePasswordPayload,
 } from "@/api/schema/identity-and-access/password";
 import { usePostQuery, usePutQuery } from "@/api/shared";
 
 export const usePasswordForgotten = () => {
-    return usePostQuery<PasswordForgottenPayload>(endpoint.identityAndAccess.requestPassword);
+    return usePostQuery<RequestPasswordPayload>(endpoint.identityAndAccess.requestPassword);
 };
 
 export const usePasswordReset = (token: string) => {
-    return usePostQuery<PasswordResetPayload>(endpoint.identityAndAccess.resetPassword(token));
+    return usePostQuery<ResetPasswordPayload>(endpoint.identityAndAccess.resetPassword(token));
 };
 
 export const usePasswordUpdate = () => {
-    return usePutQuery<PasswordUpdatePayload>(endpoint.identityAndAccess.updatePassword);
+    return usePutQuery<UpdatePasswordPayload>(endpoint.identityAndAccess.updatePassword);
 };

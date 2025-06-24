@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Search } from "@tamagui/lucide-icons";
+import { Plus, Search } from "@tamagui/lucide-icons";
 import { YStack } from "tamagui";
 
 import { useBookmarkList } from "@/api/request/feed-management/bookmark";
@@ -19,6 +19,7 @@ export default function Index() {
         <ScreenView>
             <ScreenView.Heading
                 title="Bookmarks"
+                leadingAction={<IconButton onPress={() => {}} icon={<Plus size="$1" />} />}
                 trailingActions={<IconButton onPress={() => {}} icon={<Search size="$1" />} />}
             />
 

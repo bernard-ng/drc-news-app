@@ -1,63 +1,55 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
+import { joiResolver } from "@hookform/resolvers/joi";
 import { Sheet } from "@tamagui/sheet";
+import { useForm } from "react-hook-form";
 import Toast from "react-native-toast-message";
 import { Button, YStack } from "tamagui";
 
 import { useUpdateBookmark } from "@/api/request/feed-management/bookmark";
-import { Bookmark } from "@/api/schema/feed-management/bookmark";
+import { Bookmark, BookmarkPayload, BookmarkPayloadSchema } from "@/api/schema/feed-management/bookmark";
 import { ErrorResponse, safeMessage } from "@/api/shared";
-import { Switch } from "@/ui/components/controls/forms/Switch";
-import { TextArea } from "@/ui/components/controls/forms/TextArea";
-import { TextInput } from "@/ui/components/controls/forms/TextInput";
+import { FormSwitch } from "@/ui/components/controls/forms/Switch";
+import { FormTextArea } from "@/ui/components/controls/forms/TextArea";
+import { FormTextInput } from "@/ui/components/controls/forms/TextInput";
 import { SubmitButton } from "@/ui/components/controls/SubmitButton";
 
 type UpdateBookmarkSheetProps = {
-    id: string;
     data: Bookmark;
 };
 
 export const UpdateBookmarkSheet = (props: UpdateBookmarkSheetProps) => {
-    const { id, data } = props;
-    const { mutate, isPending, error } = useUpdateBookmark(id);
+    const { data } = props;
+    const { mutate, isPending } = useUpdateBookmark(data.id);
     const [open, setOpen] = useState(false);
 
-    const [name, setName] = useState(data.name);
-    const [description, setDescription] = useState(data.description);
-    const [isPublic, setIsPublic] = useState(data.isPublic);
+    const { control, handleSubmit, formState, reset } = useForm<BookmarkPayload>({
+        resolver: joiResolver(BookmarkPayloadSchema),
+    });
 
     useEffect(() => {
-        if (error) {
-            Toast.show({
-                text1: "Erreur",
-                text2: safeMessage(error),
-                type: "error",
-            });
-        }
-    }, [error]);
+        reset({ ...data });
+    }, [data, reset]);
 
-    const handleSubmit = useCallback(() => {
-        mutate(
-            { name, description, isPublic },
-            {
-                onSuccess: () => {
-                    Toast.show({
-                        text1: "Félicitations !",
-                        text2: "Votre signet a été créé avec succès.",
-                        type: "success",
-                    });
-                    setOpen(false);
-                },
-                onError: (error: ErrorResponse) => {
-                    Toast.show({
-                        text1: "Erreur",
-                        text2: safeMessage(error),
-                        type: "error",
-                    });
-                },
-            }
-        );
-    }, [description, isPublic, mutate, name]);
+    const onSubmit = (data: BookmarkPayload) => {
+        mutate(data, {
+            onSuccess: () => {
+                Toast.show({
+                    text1: "Félicitations !",
+                    text2: "Votre signet a été modifié avec succès.",
+                    type: "success",
+                });
+                setOpen(false);
+            },
+            onError: (error: ErrorResponse) => {
+                Toast.show({
+                    text1: "Erreur",
+                    text2: safeMessage(error),
+                    type: "error",
+                });
+            },
+        });
+    };
 
     return (
         <YStack alignItems="center" justifyContent="center">
@@ -89,35 +81,32 @@ export const UpdateBookmarkSheet = (props: UpdateBookmarkSheetProps) => {
                 >
                     <YStack width="100%">
                         <Sheet.Handle theme="accent" />
-                        <TextInput
-                            id="bookmark-name"
+                        <FormTextInput
+                            name="name"
+                            control={control}
                             label="Name"
                             caption="Enter a name for your bookmark."
-                            value={name}
-                            onChangeText={setName}
                             placeholder="My awesome bookmark"
                         />
-                        <TextArea
-                            id="bookmark-description"
+                        <FormTextArea
+                            name="description"
+                            control={control}
                             caption="Describe your bookmark for easy retrieval."
                             label="Description"
-                            value={description}
-                            onChangeText={setDescription}
                             placeholder="A brief description..."
                         />
-                        <Switch
-                            id="bookmark-public"
+                        <FormSwitch
+                            name="isPublic"
+                            control={control}
                             label="Public"
                             description="A public bookmark is visible and accessible to other users"
-                            isChecked={isPublic}
-                            onCheckedChange={setIsPublic}
                         />
                     </YStack>
                     <SubmitButton
-                        label="Créer le signet"
-                        handleSubmit={handleSubmit}
+                        label="Modifier le signet"
+                        onPress={handleSubmit(onSubmit)}
                         isPending={isPending}
-                        isFormValid={true}
+                        isValid={formState.isValid}
                     />
                 </Sheet.Frame>
             </Sheet>

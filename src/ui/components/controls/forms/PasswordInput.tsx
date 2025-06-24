@@ -4,6 +4,7 @@ import { Eye, EyeOff, Lock } from "@tamagui/lucide-icons";
 import { XStack } from "tamagui";
 
 import { Input, InputProps } from "@/ui/components/controls/forms/Input";
+import { withController } from "@/ui/components/controls/forms/withController";
 
 export const PasswordInput = (props: InputProps) => {
     const { label = "Mot de passe", onChangeText, caption, error, ...rest } = props;
@@ -18,6 +19,7 @@ export const PasswordInput = (props: InputProps) => {
             leadingAdornment={Lock}
             secureTextEntry={!showPassword}
             paddingRight="$6"
+            placeholder="Mot de passe"
             trailingAdornment={
                 <XStack
                     paddingRight="$3"
@@ -31,3 +33,5 @@ export const PasswordInput = (props: InputProps) => {
         />
     );
 };
+
+export const FormPasswordInput = withController<InputProps>(PasswordInput);

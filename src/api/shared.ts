@@ -56,7 +56,6 @@ export const safeMessage = (error: AxiosError<ClientErrorResponse | ClientDetail
         }
     }
 
-    console.error(JSON.stringify(error));
     return "Une erreur est survenue";
 };
 
